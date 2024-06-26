@@ -1,27 +1,29 @@
-# db_utils.py
-# This script contains utility functions for interacting with the SQLite database.
-import os
-import sqlite3
-from contextlib import contextmanager
-from dotenv import load_dotenv
+# src/database/database_utils.py
+from flask import flash, redirect, url_for
+from utils.create_app import db
+from models import InventoryItem
 
-load_dotenv()
-db_path = os.getenv('DB_PATH')
+def add_item(form_data):
+    item = InventoryItem(**form_data)
+    db.session.add(item)
+    db.session.commit()
+    flash('Item added successfully!')
+    return redirect(url_for('inventory.list_items'))
 
-@contextmanager
-def get_db_connection():
-    conn = sqlite3.connect(db_path)
-    try:
-        yield conn
-    finally:
-        conn.close()
+def list_items():
+    return InventoryItem.query.all()
 
-def execute_db_operation(operation, *args, **kwargs):
-    with get_db_connection() as conn:
-        try:
-            result = operation(conn, *args, **kwargs)
-            conn.commit()
-            return result
-        except Exception as e:
-            conn.rollback()
-            raise e
+def edit_item(item_id, form_data):
+    item = InventoryItem.query.get_or_404(item_id)
+    item.product_name = form_data.get('product_name')
+    # Update other fields similarly...
+    db.session.commit()
+    flash('Item updated successfully!')
+    return redirect(url_for('inventory.list_items'))
+
+def delete_item(item_id):
+    item = InventoryItem.query.get_or_404(item_id)
+    db.session.delete(item)
+    db.session.commit()
+    flash('Item deleted successfully!')
+    return redirect(url_for('inventory.list_items'))

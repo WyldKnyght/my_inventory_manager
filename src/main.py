@@ -1,5 +1,7 @@
-# main.py
-from user_interface.main_gui import start_app
+# src/main.py
+from utils.create_app import create_app
 
-if __name__ == "__main__":
-    start_app()
+app = create_app()
+
+if __name__ == '__main__':
+    app.run()

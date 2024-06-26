@@ -1,0 +1,47 @@
+m:\dev_env\my_inventory_manager
+├── .env
+├── .gitignore
+├── LICENSE
+├── README.md
+├── database
+│   ├── db_tables.sql
+│   └── small_business.db
+├── docs
+│   ├── data_head_hunters.py
+│   ├── database_schema.md
+│   ├── folder_structure.txt
+│   └── project_plan.md
+├── requirements.txt
+├── src
+│   ├── __init__.py
+│   ├── config.py
+│   ├── database
+│   │   └── create_db.py
+│   ├── forms
+│   │   ├── add_brand_form.py
+│   │   ├── add_category_form.py
+│   │   ├── add_inventory_status_form.py
+│   │   └── add_supplier_form.py
+│   ├── main.py
+│   ├── models
+│   │   ├── brand.py
+│   │   ├── category.py
+│   │   ├── init.py
+│   │   ├── inventory_item.py
+│   │   ├── inventory_status.py
+│   │   └── supplier.py
+│   ├── routes
+│   │   ├── brand_routes.py
+│   │   ├── category_routes.py
+│   │   ├── init.py
+│   │   ├── inventory_routes.py
+│   │   ├── inventory_status_routes.py
+│   │   └── supplier_routes.py
+│   ├── templates
+│   │   └── index.html
+│   └── utils
+│       ├── __init__.py
+│       └── logging_colors.py
+└── tests
+
+Script last modified: 2024-06-26 13:22:51
