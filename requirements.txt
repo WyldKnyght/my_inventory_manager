@@ -1,0 +1,4 @@
+sqlalchemy
+rich
+treelib
+python-dotenv
