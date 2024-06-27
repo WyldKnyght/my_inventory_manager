@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supplier Management</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assuming you have external CSS for styling -->
+</head>
+<body>
+    <h1>Supplier Management</h1>
+
+    <!-- Form for Adding New Suppliers -->
+    <form action="/path/to/add/supplier" method="post">
+        <label for="supplier-name">Supplier Name:</label>
+        <input type="text" id="supplier-name" name="supplierName" required>
+        <br>
+        <label for="contact-person">Contact Person:</label>
+        <input type="text" id="contact-person" name="contactPerson">
+        <br>
+        <label for="address">Address:</label>
+        <textarea id="address" name="address"></textarea>
+        <br>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone">
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <br>
+        <label for="website">Website:</label>
+        <input type="url" id="website" name="website">
+        <br>
+        <button type="submit">Add Supplier</button>
+    </form>
+
+    <!-- Table for Displaying Existing Suppliers -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Contact Person</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Website</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be populated dynamically based on supplier data -->
+            <tr>
+                <td>1</td>
+                <td>Acme Corp</td>
+                <td>Jane Doe</td>
+                <td>123 Acme St, City, State</td>
+                <td>+1234567890</td>
+                <td>jane.doe@example.com</td>
+                <td>http://www.acmecorp.com</td>
+                <td>
+                    <button onclick="editSupplier(1)">Edit</button>
+                    <button onclick="deleteSupplier(1)">Delete</button>
+                </td>
+            </tr>
+            <!-- More rows... -->
+        </tbody>
+    </table>
+
+    <script src="scripts.js"></script> <!-- Assuming you have external JS for handling form submissions and dynamic updates -->
+</body>
+</html>

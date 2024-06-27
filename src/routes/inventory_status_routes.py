@@ -4,14 +4,14 @@ from utils.create_app import db
 from models.inventory_status import InventoryStatus
 from forms.add_inventory_status_form import AddInventoryStatusForm
 
-bp = Blueprint('status', __name__)
+inventory_status_routes = Blueprint('status', __name__)
 
-@bp.route('/statuses', methods=['GET'])
+@inventory_status_routes.route('/statuses', methods=['GET'])
 def statuses():
     statuses = InventoryStatus.query.all()
     return render_template('statuses.html', statuses=statuses)
 
-@bp.route('/add_status', methods=['GET', 'POST'])
+@inventory_status_routes.route('/add_status', methods=['GET', 'POST'])
 def add_status():
     form = AddInventoryStatusForm()
     if form.validate_on_submit():

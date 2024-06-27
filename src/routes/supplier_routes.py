@@ -4,14 +4,14 @@ from utils.create_app import db
 from models.supplier import Supplier
 from forms.add_supplier_form import AddSupplierForm
 
-bp = Blueprint('supplier', __name__)
+supplier_routes = Blueprint('supplier', __name__)
 
-@bp.route('/suppliers', methods=['GET'])
+@supplier_routes.route('/suppliers', methods=['GET'])
 def suppliers():
     suppliers = Supplier.query.all()
     return render_template('suppliers.html', suppliers=suppliers)
 
-@bp.route('/add_supplier', methods=['GET', 'POST'])
+@supplier_routes.route('/add_supplier', methods=['GET', 'POST'])
 def add_supplier():
     form = AddSupplierForm()
     if form.validate_on_submit():

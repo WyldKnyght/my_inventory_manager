@@ -1,7 +1,7 @@
 # src/database/database_utils.py
 from flask import flash, redirect, url_for
 from utils.create_app import db
-from models import InventoryItem
+from models.inventory_item import InventoryItem
 
 def add_item(form_data):
     item = InventoryItem(**form_data)

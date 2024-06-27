@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brand Management</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assuming you have external CSS for styling -->
+</head>
+<body>
+    <h1>Brand Management</h1>
+
+    <!-- Form for Adding New Brands -->
+    <form action="/path/to/add/brand" method="post">
+        <label for="brand-name">Brand Name:</label>
+        <input type="text" id="brand-name" name="brandName" required>
+        <br>
+        <button type="submit">Add Brand</button>
+    </form>
+
+    <!-- Table for Displaying Existing Brands -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be populated dynamically based on brand data -->
+            <tr>
+                <td>1</td>
+                <td>Coca-Cola</td>
+                <td>
+                    <button onclick="editBrand(1)">Edit</button>
+                    <button onclick="deleteBrand(1)">Delete</button>
+                </td>
+            </tr>
+            <!-- More rows... -->
+        </tbody>
+    </table>
+
+    <script src="scripts.js"></script> <!-- Assuming you have external JS for handling form submissions and dynamic updates -->
+</body>
+</html>

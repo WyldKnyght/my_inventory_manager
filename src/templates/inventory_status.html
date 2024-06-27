@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory Status Management</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assuming you have external CSS for styling -->
+</head>
+<body>
+    <h1>Inventory Status Management</h1>
+
+    <!-- Form for Adding New Inventory Statuses -->
+    <form action="/path/to/add/inventory/status" method="post">
+        <label for="status-name">Status Name:</label>
+        <input type="text" id="status-name" name="statusName" required>
+        <br>
+        <button type="submit">Add Status</button>
+    </form>
+
+    <!-- Table for Displaying Existing Inventory Statuses -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Status Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be populated dynamically based on inventory status data -->
+            <tr>
+                <td>1</td>
+                <td>In Stock</td>
+                <td>
+                    <button onclick="editStatus(1)">Edit</button>
+                    <button onclick="deleteStatus(1)">Delete</button>
+                </td>
+            </tr>
+            <!-- More rows... -->
+        </tbody>
+    </table>
+
+    <script src="scripts.js"></script> <!-- Assuming you have external JS for handling form submissions and dynamic updates -->
+</body>
+</html>

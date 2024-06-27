@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Category Management</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assuming you have external CSS for styling -->
+</head>
+<body>
+    <h1>Category Management</h1>
+
+    <!-- Form for Adding New Categories -->
+    <form action="/path/to/add/category" method="post">
+        <label for="category-name">Category Name:</label>
+        <input type="text" id="category-name" name="categoryName" required>
+        <br>
+        <button type="submit">Add Category</button>
+    </form>
+
+    <!-- Table for Displaying Existing Categories -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be populated dynamically based on category data -->
+            <tr>
+                <td>1</td>
+                <td>Electronics</td>
+                <td>
+                    <button onclick="editCategory(1)">Edit</button>
+                    <button onclick="deleteCategory(1)">Delete</button>
+                </td>
+            </tr>
+            <!-- More rows... -->
+        </tbody>
+    </table>
+
+    <script src="scripts.js"></script> <!-- Assuming you have external JS for handling form submissions and dynamic updates -->
+</body>
+</html>

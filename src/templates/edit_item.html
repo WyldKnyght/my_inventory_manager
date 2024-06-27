@@ -1,0 +1,34 @@
+<!-- src/templates/edit_item.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Item</title>
+    <!-- Add CSS and JS links here -->
+</head>
+<body>
+    <h1>Edit Item</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        {{ form.product_name.label }} {{ form.product_name }}<br>
+        {{ form.product_code.label }} {{ form.product_code }}<br>
+        {{ form.description.label }} {{ form.description }}<br>
+        {{ form.category_id.label }} {{ form.category_id }}<br>
+        {{ form.brand_id.label }} {{ form.brand_id }}<br>
+        {{ form.size.label }} {{ form.size }}<br>
+        {{ form.color.label }} {{ form.color }}<br>
+        {{ form.cost_price.label }} {{ form.cost_price }}<br>
+        {{ form.markup.label }} {{ form.markup }}<br>
+        {{ form.retail_price.label }} {{ form.retail_price }}<br>
+        {{ form.product_status.label }} {{ form.product_status }}<br>
+        {{ form.notes.label }} {{ form.notes }}<br>
+        {{ form.supplier_id.label }} {{ form.supplier_id }}<br>
+        {{ form.singles_in_stock.label }} {{ form.singles_in_stock }}<br>
+        {{ form.cases_in_stock.label }} {{ form.cases_in_stock }}<br>
+        {{ form.qty_per_case.label }} {{ form.qty_per_case }}<br>
+        {{ form.condition.label }} {{ form.condition }}<br>
+        {{ form.submit }}
+    </form>
+</body>
+</html>

@@ -4,14 +4,14 @@ from utils.create_app import db
 from models.brand import Brand
 from forms.add_brand_form import AddBrandForm
 
-bp = Blueprint('brand', __name__)
+brand_routes = Blueprint('brand', __name__)
 
-@bp.route('/brands', methods=['GET'])
+@brand_routes.route('/brands', methods=['GET'])
 def brands():
     brands = Brand.query.all()
     return render_template('brands.html', brands=brands)
 
-@bp.route('/add_brand', methods=['GET', 'POST'])
+@brand_routes.route('/add_brand', methods=['GET', 'POST'])
 def add_brand():
     form = AddBrandForm()
     if form.validate_on_submit():

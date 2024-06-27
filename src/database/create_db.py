@@ -9,11 +9,11 @@ from sqlalchemy.orm import sessionmaker
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from utils.create_app import db  
-from src.models.brand import Brand
-from src.models.category import Category
-from src.models.inventory_item import InventoryItem
-from src.models.inventory_status import InventoryStatus
-from src.models.supplier import Supplier
+from models.brand import Brand
+from models.category import Category
+from models.inventory_item import InventoryItem
+from models.inventory_status import InventoryStatus
+from models.supplier import Supplier
 
 # Define your database URL
 DB_URL = 'sqlite:///database/small_business.db'
