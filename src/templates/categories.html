@@ -1,23 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Category Management</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Assuming you have external CSS for styling -->
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Category Management{% endblock %}
+
+{% block content %}
     <h1>Category Management</h1>
 
     <!-- Form for Adding New Categories -->
-    <form action="/path/to/add/category" method="post">
-        <label for="category-name">Category Name:</label>
-        <input type="text" id="category-name" name="categoryName" required>
+    <form action="{{ url_for('category.add_category') }}" method="post">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        <label for="category-name">{{ form.category_name.label }}</label>
+        {{ form.category_name }}
         <br>
         <button type="submit">Add Category</button>
     </form>
 
     <!-- Table for Displaying Existing Categories -->
-    <table>
+    <table class="data-table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -26,19 +25,25 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Rows will be populated dynamically based on category data -->
+            {% for category in categories.items %}
             <tr>
-                <td>1</td>
-                <td>Electronics</td>
+                <td>{{ category.category_id }}</td>
+                <td>{{ category.category_name }}</td>
                 <td>
-                    <button onclick="editCategory(1)">Edit</button>
-                    <button onclick="deleteCategory(1)">Delete</button>
+                    <a href="{{ url_for('category.edit_category', category_id=category.category_id) }}" class="btn btn-edit">Edit</a>
+                    <form action="{{ url_for('category.delete_category', category_id=category.category_id) }}" method="post" class="inline-form">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <button type="submit" class="btn btn-delete">Delete</button>
+                    </form>
                 </td>
             </tr>
-            <!-- More rows... -->
+            {% endfor %}
         </tbody>
     </table>
 
-    <script src="scripts.js"></script> <!-- Assuming you have external JS for handling form submissions and dynamic updates -->
-</body>
-</html>
+    {{ render_pagination(categories, 'category.categories') }}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/category.js') }}"></script>
+{% endblock %}

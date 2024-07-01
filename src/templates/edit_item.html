@@ -1,12 +1,8 @@
-<!-- src/templates/edit_item.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Item</title>
-    <!-- Add CSS and JS links here -->
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Edit Item{% endblock %}
+
+{% block content %}
     <h1>Edit Item</h1>
     <form method="POST">
         {{ form.hidden_tag() }}
@@ -30,5 +26,4 @@
         {{ form.condition.label }} {{ form.condition }}<br>
         {{ form.submit }}
     </form>
-</body>
-</html>
+{% endblock %}

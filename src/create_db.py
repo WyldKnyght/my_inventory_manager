@@ -1,17 +1,11 @@
 # src/database/create_db.py
-
-import sys
-import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
-# Append the path to the parent directory of src to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 from utils.create_app import db  
 from models.brand import Brand
 from models.category import Category
-from models.inventory_item import InventoryItem
+from models.inventory import InventoryItem
 from models.inventory_status import InventoryStatus
 from models.supplier import Supplier
 
@@ -26,10 +20,17 @@ db.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-# You can optionally add initialization logic here, like adding default data
+def add_default_data(session):
+    # Add default data here
+    pass
 
-# Commit the session and close it
-session.commit()
-session.close()
+try:
+    db.metadata.create_all(engine)
+    add_default_data(session)
+    session.commit()
+except Exception as e:
+    print(f"An error occurred: {e}")
+finally:
+    session.close()
 
 print("Database created successfully.")

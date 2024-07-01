@@ -15,9 +15,9 @@ m:\dev_env\my_inventory_manager
 ├── src
 │   ├── __init__.py
 │   ├── config.py
+│   ├── create_db.py
 │   ├── database
 │   │   ├── __init__.py
-│   │   ├── create_db.py
 │   │   ├── db_add_elements.py
 │   │   ├── db_delete_elements.py
 │   │   ├── db_edit_elements.py
@@ -35,8 +35,7 @@ m:\dev_env\my_inventory_manager
 │   │   ├── __init__.py
 │   │   ├── brand.py
 │   │   ├── category.py
-│   │   ├── init.py
-│   │   ├── inventory_item.py
+│   │   ├── inventory.py
 │   │   ├── inventory_status.py
 │   │   └── supplier.py
 │   ├── routes
@@ -44,17 +43,30 @@ m:\dev_env\my_inventory_manager
 │   │   ├── admin_routes.py
 │   │   ├── brand_routes.py
 │   │   ├── category_routes.py
-│   │   ├── init.py
 │   │   ├── inventory_routes.py
 │   │   ├── inventory_status_routes.py
 │   │   └── supplier_routes.py
+│   ├── static
+│   │   ├── css
+│   │   │   └── styles.css
+│   │   └── js
+│   │       ├── brand.js
+│   │       ├── category.js
+│   │       ├── inventory.js
+│   │       ├── scripts.js
+│   │       ├── status.js
+│   │       └── supplier.js
 │   ├── templates
+│   │   ├── add_item.html
+│   │   ├── base.html
 │   │   ├── brands.html
 │   │   ├── categories.html
 │   │   ├── dashboard.html
+│   │   ├── edit_item.html
 │   │   ├── index.html
 │   │   ├── inventory.html
 │   │   ├── inventory_status.html
+│   │   ├── macros.html
 │   │   └── suppliers.html
 │   └── utils
 │       ├── __init__.py
@@ -62,4 +74,4 @@ m:\dev_env\my_inventory_manager
 │       └── logging_colors.py
 └── tests
 
-Script last modified: 2024-06-26 15:47:58
+Script last modified: 2024-06-27 14:55:09

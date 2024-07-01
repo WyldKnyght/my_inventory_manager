@@ -1,38 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Supplier Management</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Assuming you have external CSS for styling -->
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Supplier Management{% endblock %}
+
+{% block content %}
     <h1>Supplier Management</h1>
 
     <!-- Form for Adding New Suppliers -->
-    <form action="/path/to/add/supplier" method="post">
-        <label for="supplier-name">Supplier Name:</label>
-        <input type="text" id="supplier-name" name="supplierName" required>
+    <form action="{{ url_for('supplier.add_supplier') }}" method="post">
+        {{ form.hidden_tag() }}
+        {{ form.csrf_token }}
+        <label for="supplier-name">{{ form.name.label }}</label>
+        {{ form.name }}
         <br>
-        <label for="contact-person">Contact Person:</label>
-        <input type="text" id="contact-person" name="contactPerson">
+        <label for="contact-person">{{ form.contact_person.label }}</label>
+        {{ form.contact_person }}
         <br>
-        <label for="address">Address:</label>
-        <textarea id="address" name="address"></textarea>
+        <label for="address">{{ form.address.label }}</label>
+        {{ form.address }}
         <br>
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone">
+        <label for="phone">{{ form.phone.label }}</label>
+        {{ form.phone }}
         <br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
+        <label for="email">{{ form.email.label }}</label>
+        {{ form.email }}
         <br>
-        <label for="website">Website:</label>
-        <input type="url" id="website" name="website">
+        <label for="website">{{ form.website.label }}</label>
+        {{ form.website }}
         <br>
         <button type="submit">Add Supplier</button>
     </form>
 
     <!-- Table for Displaying Existing Suppliers -->
-    <table>
+    <table class="data-table">
         <thead>
             <tr>
                 <th>ID</th>
@@ -46,24 +45,30 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Rows will be populated dynamically based on supplier data -->
+            {% for supplier in suppliers.items %}
             <tr>
-                <td>1</td>
-                <td>Acme Corp</td>
-                <td>Jane Doe</td>
-                <td>123 Acme St, City, State</td>
-                <td>+1234567890</td>
-                <td>jane.doe@example.com</td>
-                <td>http://www.acmecorp.com</td>
+                <td>{{ supplier.supplier_id }}</td>
+                <td>{{ supplier.name }}</td>
+                <td>{{ supplier.contact_person }}</td>
+                <td>{{ supplier.address }}</td>
+                <td>{{ supplier.phone }}</td>
+                <td>{{ supplier.email }}</td>
+                <td>{{ supplier.website }}</td>
                 <td>
-                    <button onclick="editSupplier(1)">Edit</button>
-                    <button onclick="deleteSupplier(1)">Delete</button>
+                    <a href="{{ url_for('supplier.edit_supplier', supplier_id=supplier.supplier_id) }}" class="btn btn-edit">Edit</a>
+                    <form action="{{ url_for('supplier.delete_supplier', supplier_id=supplier.supplier_id) }}" method="post" class="inline-form">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <button type="submit" class="btn btn-delete">Delete</button>
+                    </form>
                 </td>
             </tr>
-            <!-- More rows... -->
+            {% endfor %}
         </tbody>
     </table>
 
-    <script src="scripts.js"></script> <!-- Assuming you have external JS for handling form submissions and dynamic updates -->
-</body>
-</html>
+    {{ render_pagination(suppliers, 'supplier.suppliers') }}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/supplier.js') }}"></script>
+{% endblock %}
