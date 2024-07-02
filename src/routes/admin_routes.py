@@ -9,10 +9,23 @@ from utils.logging_colors import logger
 
 admin_routes = Blueprint('admin', __name__)
 
+@admin_routes.route('/')
+def index():
+    """Index page."""
+    return render_template('index.html')
+
 @admin_routes.route('/admin')
 def admin_dashboard():
-    logger.info("Admin dashboard accessed")
-    return render_template('dashboard.html')
+    """Admin dashboard."""
+    navbar_items = [
+        {'name': 'Home', 'url': '/'},
+        {'name': 'Sales', 'url': '#'},
+        {'name': 'Purchases', 'url': '#'},
+        {'name': 'Inventory', 'url': '/admin/inventory'},
+        {'name': 'Reports', 'url': '#'},
+        {'name': 'Admin', 'url': '/admin'},
+    ]
+    return render_template('dashboard.html', navbar_items=navbar_items, active_page='admin')
 
 @admin_routes.route('/admin/inventory')
 def manage_inventory():

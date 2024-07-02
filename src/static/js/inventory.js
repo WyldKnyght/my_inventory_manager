@@ -1,13 +1,27 @@
 // inventory.js
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Inventory-specific scripts can go here
+    const searchInput = document.getElementById('searchInput');
+    const table = document.getElementById('inventoryTable');
+
+    searchInput.addEventListener('keyup', function() {
+        const searchTerm = this.value.toLowerCase();
+        const rows = table.getElementsByTagName('tr');
+
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            const cells = row.getElementsByTagName('td');
+            let found = false;
+
+            for (let j = 0; j < cells.length; j++) {
+                const cellText = cells[j].textContent.toLowerCase();
+                if (cellText.includes(searchTerm)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            row.style.display = found ? '' : 'none';
+        }
+    });
 });
-
-// Example function to handle form submission
-function handleSubmit(event) {
-    event.preventDefault();
-    // Perform form validation and submission logic
-}
-
-document.querySelector('.your-form-class').addEventListener('submit', handleSubmit);

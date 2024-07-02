@@ -1,9 +1,9 @@
-# forms/add_item_form.py
+# forms/inventory_tab_form.py
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField, IntegerField, SelectField, DecimalField
 from wtforms.validators import DataRequired, NumberRange, Optional
 
-class AddItemForm(FlaskForm):
+class InventoryTabForm(FlaskForm):
     product_name = StringField('Product Name', validators=[DataRequired()])
     product_code = StringField('Product Code', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[Optional()])
@@ -22,10 +22,8 @@ class AddItemForm(FlaskForm):
     qty_per_case = IntegerField('Qty Per Case', validators=[Optional(), NumberRange(min=1)])
     condition = StringField('Condition', validators=[Optional()])
 
-    submit = SubmitField('Add Item')
-
     def __init__(self, *args, **kwargs):
-        super(AddItemForm, self).__init__(*args, **kwargs)
+        super(InventoryTabForm, self).__init__(*args, **kwargs)
         # Populate choices dynamically
         self.category_id.choices = []  # Add category choices
         self.brand_id.choices = []  # Add brand choices

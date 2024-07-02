@@ -1,4 +1,4 @@
-# src/routes/inventory_routes.py
+# src/routes/admin_inventory_routes.py
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
 from models.inventory import InventoryItem
 from models.category import Category
