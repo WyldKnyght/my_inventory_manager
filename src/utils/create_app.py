@@ -11,7 +11,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.DEBUG)  # Set logging level to DEBUG
+logging.basicConfig(level=logging.DEBUG)
 
 def create_app(config_class=Config):
     # Go up one directory level from utils and then into templates

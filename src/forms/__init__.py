@@ -1,5 +1,5 @@
 # src\forms\__init__.py
-from .add_brand_form import AddBrandForm
+from .brand_form import AddBrandForm
 from .add_category_form import AddCategoryForm
 from .add_inventory_status_form import AddInventoryStatusForm
 from .add_item_form import AddItemForm

@@ -1,3 +1,4 @@
+# src/main.py
 from flask import render_template
 from utils.create_app import create_app
 import webbrowser
