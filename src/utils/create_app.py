@@ -46,13 +46,16 @@ def create_app(config_class=Config):
 
 def register_blueprints(app):
     logger.debug("Importing routes")
+    from routes.tab_admin_routes import admin_routes
+    from routes.tab_inventory_routes import inventory_tab_routes
+    from routes.tab_purchase_routes import purchase_tab_routes
+    from routes.tab_report_routes import report_tab_routes
+    from routes.tab_sale_routes import sales_tab_routes
     from routes.admin_inventory_routes import inventory_routes
     from routes.admin_category_routes import category_routes
     from routes.admin_brand_routes import brand_routes
     from routes.admin_supplier_routes import supplier_routes
     from routes.admin_inventory_status_routes import inventory_status_routes
-    from routes.admin_tab_routes import admin_routes
-    from routes.inventory_tab_routes import inventory_tab_routes
     logger.debug("Registering routes")
 
     # Routes of admin functionality, hence prefixed with '/admin'

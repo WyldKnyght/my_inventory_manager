@@ -48,8 +48,9 @@
         <button onclick="location.href='{{ url_for('inventory.inventory') }}'">Manage Inventory</button>
         <button onclick="location.href='{{ url_for('category.categories') }}'">Manage Categories</button>
         <button onclick="location.href='{{ url_for('brand.brands') }}'">Manage Brands</button>
-        <button onclick="location.href='{{ url_for('status.statuses') }}'">Manage Inventory Status</button>
+        <button onclick="location.href='{{ url_for('inventory_status.statuses') }}'">Manage Inventory Status</button>
         <button onclick="location.href='{{ url_for('supplier.suppliers') }}'">Manage Suppliers</button>
+        <button onclick="location.href='{{ url_for('customer.customers') }}'">Manage Customers</button>
     </div>
 </div>
 {% endblock %}

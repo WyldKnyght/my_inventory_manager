@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "macros.html" import render_pagination %}
+
+{% block title %}Sales{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>Sales</h1>
+    <a href="{{ url_for('sales.new_sale') }}" class="btn">New Sale</a>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Sale ID</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales.items %}
+            <tr>
+                <td>{{ sale.sale_id }}</td>
+                <td>{{ sale.order_date }}</td>
+                <td>{{ sale.customer.customer_name }}</td>
+                <td>${{ "%.2f"|format(sale.total_cost) }}</td>
+                <td>
+                    <a href="{{ url_for('sales.view_sale', sale_id=sale.sale_id) }}">View</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {{ render_pagination(sales, 'sales.sales') }}
+</div>
+{% endblock %}

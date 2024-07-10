@@ -10,3 +10,8 @@ class CategoryForm(FlaskForm):
     parent_category_id = StringField('Parent Category ID', validators=[Optional(), Length(max=128)])
     sub_categories_name = StringField('Sub-Categories Name', validators=[Optional(), Length(max=128)])
     submit = SubmitField('Add Category')
+
+    def __init__(self, *args, **kwargs):
+        super(CategoryForm, self).__init__(*args, **kwargs)
+        # Populate choices dynamically
+        self.parent_category_id.choices = []  # Add parent category choices
