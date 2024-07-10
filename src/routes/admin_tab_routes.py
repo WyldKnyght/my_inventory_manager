@@ -1,10 +1,10 @@
 # src/routes/admin_routes.py
 from flask import Blueprint, render_template, request
-from models.inventory import InventoryItem
-from models.category import Category
-from models.supplier import Supplier
-from models.brand import Brand
-from models.inventory_status import InventoryStatus
+from models.admin_inventory import InventoryItem
+from models.admin_category import Category
+from models.admin_supplier import Supplier
+from models.admin_brand import Brand
+from models.admin_inventory_status import InventoryStatus
 from utils.logging_colors import logger
 
 admin_routes = Blueprint('admin', __name__)

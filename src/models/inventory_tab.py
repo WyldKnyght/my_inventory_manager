@@ -1,9 +1,10 @@
 # src/models/inventory_tab.py
-# Used for displaying data in the inventory tab, Read Only Table
+# Display the contents ogf the inventory table
 from utils.create_app import db
 
-class InventoryTabItem(db.Model):
+class InventoryTab(db.Model):
     __tablename__ = 'inventory'
+    __table_args__ = {'extend_existing': True}
     product_id = db.Column(db.String, primary_key=True)
     product_name = db.Column(db.String(128), nullable=False)
     product_code = db.Column(db.String(64), nullable=False, index=True)

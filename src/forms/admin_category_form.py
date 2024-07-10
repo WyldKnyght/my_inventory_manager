@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Length, Optional
 
-class AddCategoryForm(FlaskForm):
+class CategoryForm(FlaskForm):
     category_id = StringField('Category ID', validators=[DataRequired(), Length(max=128)])
     category_name = StringField('Category Name', validators=[DataRequired(), Length(max=128)])
     category_prefix = StringField('Category Prefix', validators=[DataRequired(), Length(max=4)])

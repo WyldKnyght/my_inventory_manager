@@ -1,8 +1,8 @@
 # src/routes/inventory_status_routes.py
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
 from utils.create_app import db
-from models.inventory_status import InventoryStatus
-from forms.add_inventory_status_form import AddInventoryStatusForm
+from models.admin_inventory_status import InventoryStatus
+from forms.admin_inventory_status_form import InventoryStatusForm
 from utils.logging_colors import logger
 
 inventory_status_routes = Blueprint('status', __name__)
@@ -16,7 +16,7 @@ def statuses():
 
 @inventory_status_routes.route('/add_status', methods=['GET', 'POST'])
 def add_status():
-    form = AddInventoryStatusForm()
+    form = InventoryStatusForm()
     if form.validate_on_submit():
         try:
             status = InventoryStatus(

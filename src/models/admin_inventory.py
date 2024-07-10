@@ -1,6 +1,4 @@
-# src/models/inventory.py
-# Combined Model with Read-Only Enforcement
-
+# src/models/admin_inventory.py
 from utils.create_app import db
 
 class InventoryItem(db.Model):
@@ -45,6 +43,3 @@ class InventoryItem(db.Model):
             'qty_per_case': self.qty_per_case,
             'condition': self.condition
         }
-
-    def save(self, *args, **kwargs):
-        raise NotImplementedError("This model is read-only.")

@@ -1,8 +1,8 @@
 # src/routes/category_routes.py
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
 from utils.create_app import db
-from models.category import Category
-from forms.add_category_form import AddCategoryForm
+from models.admin_category import Category
+from forms.admin_category_form import CategoryForm
 from utils.logging_colors import logger
 
 category_routes = Blueprint('category', __name__)
@@ -16,7 +16,7 @@ def categories():
 
 @category_routes.route('/add_category', methods=['GET', 'POST'])
 def add_category():
-    form = AddCategoryForm()
+    form = CategoryForm()
     if form.validate_on_submit():
         try:
             category = Category(

@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, Optional, URL
 
-class AddSupplierForm(FlaskForm):
+class SupplierForm(FlaskForm):
     supplier_id = StringField('Supplier ID', validators=[DataRequired(), Length(max=128)])
     name = StringField('Name', validators=[DataRequired(), Length(max=128)])
     contact_person = StringField('Contact Person', validators=[Optional(), Length(max=128)])

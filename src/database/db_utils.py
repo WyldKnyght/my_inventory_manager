@@ -1,7 +1,7 @@
 # src/database/database_utils.py
 from flask import flash, redirect, url_for
 from utils.create_app import db
-from models.inventory import InventoryItem
+from models.admin_inventory import InventoryItem
 import logging
 
 logger = logging.getLogger(__name__)

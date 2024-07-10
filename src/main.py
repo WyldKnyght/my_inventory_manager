@@ -25,5 +25,5 @@ def open_browser():
 if __name__ == '__main__':
     # Check if the script is running in the main process
     if os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
-        threading.Timer(1, open_browser).start()  # Not guaranteed to run exactly after 1 second
-    app.run(debug=True)  # Use debug=False in production
+        threading.Timer(1, open_browser).start()  
+    app.run(debug=True)

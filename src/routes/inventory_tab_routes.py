@@ -1,6 +1,6 @@
 # src/routes/inventory_tab_routes.py
 from flask import Blueprint, render_template, request
-from models.inventory import InventoryItem
+from models.admin_inventory import InventoryItem
 from utils.create_app import db
 
 inventory_tab_routes = Blueprint('inventory_tab', __name__)

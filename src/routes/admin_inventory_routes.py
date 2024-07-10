@@ -1,11 +1,11 @@
 # src/routes/admin_inventory_routes.py
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
-from models.inventory import InventoryItem
-from models.category import Category
-from models.brand import Brand
-from models.inventory_status import InventoryStatus
-from models.supplier import Supplier
-from forms.add_item_form import AddItemForm
+from models.admin_inventory import InventoryItem
+from models.admin_category import Category
+from models.admin_brand import Brand
+from models.admin_inventory_status import InventoryStatus
+from models.admin_supplier import Supplier
+from forms.admin_inventory_form import InventoryForm
 from database.db_utils import add_item, edit_item, delete_item, list_items
 from utils.create_app import db
 from utils.logging_colors import logger
@@ -19,8 +19,8 @@ def inventory():
     return render_template('inventory.html', items=items)
 
 @inventory_routes.route('/admin/items/add', methods=['GET', 'POST'])
-def add_item_route():
-    form = AddItemForm()
+def inventory_route():
+    form = InventoryForm()
     form.category_id.choices = [(c.category_id, c.category_name) for c in Category.query.all()]
     form.brand_id.choices = [(b.brand_id, b.brand_name) for b in Brand.query.all()]
     form.product_status.choices = [(s.inventory_status_id, s.status_name) for s in InventoryStatus.query.all()]
@@ -41,7 +41,7 @@ def add_item_route():
 @inventory_routes.route('/admin/items/edit/<int:item_id>', methods=['GET', 'POST'])
 def edit_item_route(item_id):
     item = InventoryItem.query.get_or_404(item_id)
-    form = AddItemForm(obj=item)
+    form = InventoryForm(obj=item)
     form.category_id.choices = [(c.category_id, c.category_name) for c in Category.query.all()]
     form.brand_id.choices = [(b.brand_id, b.brand_name) for b in Brand.query.all()]
     form.product_status.choices = [(s.inventory_status_id, s.status_name) for s in InventoryStatus.query.all()]

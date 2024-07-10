@@ -1,8 +1,8 @@
 # src/routes/supplier_routes.py
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
 from utils.create_app import db
-from models.supplier import Supplier
-from forms.add_supplier_form import AddSupplierForm
+from models.admin_supplier import Supplier
+from forms.admin_supplier_form import SupplierForm
 from utils.logging_colors import logger
 
 supplier_routes = Blueprint('supplier', __name__)
@@ -16,7 +16,7 @@ def suppliers():
 
 @supplier_routes.route('/add_supplier', methods=['GET', 'POST'])
 def add_supplier():
-    form = AddSupplierForm()
+    form = SupplierForm()
     if form.validate_on_submit():
         try:
             supplier = Supplier(

@@ -3,11 +3,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from utils.create_app import db  
-from models.brand import Brand
-from models.category import Category
-from models.inventory import InventoryItem
-from models.inventory_status import InventoryStatus
-from models.supplier import Supplier
+from models.admin_brand import Brand
+from models.admin_category import Category
+from models.admin_inventory import InventoryItem
+from models.admin_inventory_status import InventoryStatus
+from models.admin_supplier import Supplier
 
 # Define your database URL
 DB_URL = 'sqlite:///database/small_business.db'

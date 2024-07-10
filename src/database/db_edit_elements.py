@@ -3,7 +3,7 @@ from flask import render_template, flash, redirect, url_for
 from utils.create_app import bp
 from forms import AddItemForm
 from database.db_utils import edit_item
-from models.inventory import InventoryItem
+from models.admin_inventory import InventoryItem
 
 @bp.route('/admin/items/edit/<int:item_id>', methods=['GET', 'POST'])
 def edit_item_route(item_id):
