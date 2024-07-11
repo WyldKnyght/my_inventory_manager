@@ -1,6 +1,6 @@
 # src/routes/customer_routes.py
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
-from utils.create_app import db
+from create_app import db
 from models.customer import Customer
 from forms.customer_form import CustomerForm
 from utils.logging_colors import logger

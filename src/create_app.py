@@ -11,13 +11,14 @@ db = SQLAlchemy()
 migrate = Migrate()
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.DEBUG)
+logging.DEBUG
 
 def create_app(config_class=Config):
-    templates_dir = os.path.join(os.path.dirname(__file__), '..', 'templates')
+
+    templates_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates'))
+
     app = Flask(__name__, template_folder=templates_dir)
     app.config.from_object(config_class)
-    app.debug = config_class.DEBUG 
 
     db.init_app(app)
     migrate.init_app(app, db)

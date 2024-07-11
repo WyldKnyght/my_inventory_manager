@@ -1,5 +1,5 @@
 # src/models/inventory_status.py
-from utils.create_app import db
+from create_app import db
 
 class InventoryStatus(db.Model):
     __tablename__ = 'inventory_status'

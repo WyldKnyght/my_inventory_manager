@@ -1,6 +1,6 @@
 # src/routes/category_routes.py
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
-from utils.create_app import db
+from create_app import db
 from models.admin_category import Category
 from forms.admin_category_form import CategoryForm
 from utils.logging_colors import logger

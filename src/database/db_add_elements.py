@@ -1,6 +1,6 @@
 # src/database/db_add_elements.py
 from flask import render_template, flash, redirect, url_for
-from utils.create_app import bp
+from create_app import bp
 from forms import AddItemForm
 from database.db_utils import add_item
 

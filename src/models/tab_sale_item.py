@@ -1,5 +1,5 @@
 # src/models/tab_sale_item.py
-from utils.create_app import db
+from create_app import db
 
 class SaleItem(db.Model):
     __tablename__ = 'sale_item'

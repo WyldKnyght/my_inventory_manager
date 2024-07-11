@@ -1,5 +1,5 @@
 # src/models/tab_reports.py
-from utils.create_app import db
+from create_app import db
 
 class ReportTab(db.Model):
     __tablename__ = 'report'

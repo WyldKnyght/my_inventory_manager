@@ -1,5 +1,5 @@
 # src/models/category.py
-from utils.create_app import db
+from create_app import db
 
 class Category(db.Model):
     __tablename__ = 'category'

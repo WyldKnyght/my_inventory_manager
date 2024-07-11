@@ -1,6 +1,6 @@
 # src/models/tab_inventory.py
 # Display the contents of the inventory table (View-Only)
-from utils.create_app import db
+from create_app import db
 from .admin_inventory import InventoryItem
 
 class InventoryTab(InventoryItem):

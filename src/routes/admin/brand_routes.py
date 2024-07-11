@@ -1,6 +1,6 @@
 # src/routes/admin_brand_routes.py
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
-from utils.create_app import db
+from create_app import db
 from models.admin_brand import Brand
 from forms.admin_brand_form import BrandForm, BrandSearchForm
 from utils.logging_colors import logger

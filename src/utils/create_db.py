@@ -2,7 +2,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from utils.create_app import db  
+from create_app import db  
 from models.tab_inventory import InventoryTab
 from models.tab_purchase import PurchaseTab
 from models.tab_report import ReportTab

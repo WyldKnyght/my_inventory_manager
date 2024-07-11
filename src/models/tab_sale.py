@@ -1,5 +1,5 @@
 # src/models/tab_sale.py
-from utils.create_app import db
+from create_app import db
 from datetime import datetime, timezone
 
 class SaleTab(db.Model):

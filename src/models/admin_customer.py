@@ -1,5 +1,5 @@
 # src/models/admin_customers.py
-from utils.create_app import db
+from create_app import db
 
 class Customer(db.Model):
     __tablename__ = 'customer'

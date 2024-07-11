@@ -1,5 +1,5 @@
 # src/models/admin_inventory.py
-from utils.create_app import db
+from create_app import db
 
 class InventoryItem(db.Model):
     __tablename__ = 'inventory'

@@ -1,6 +1,6 @@
 # src/database/db_listing_elements.py
 from flask import render_template
-from utils.create_app import bp
+from create_app import bp
 from database.db_utils import list_items
 
 @bp.route('/admin/items')

@@ -1,5 +1,5 @@
 # src/models/brand.py
-from utils.create_app import db
+from create_app import db
 
 class Brand(db.Model):
     __tablename__ = 'brand'

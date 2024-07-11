@@ -1,6 +1,6 @@
 # src/routes/supplier_routes.py
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
-from utils.create_app import db
+from create_app import db
 from models.admin_supplier import Supplier
 from forms.admin_supplier_form import SupplierForm
 from utils.logging_colors import logger

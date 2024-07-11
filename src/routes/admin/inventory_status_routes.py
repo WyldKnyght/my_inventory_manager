@@ -1,6 +1,6 @@
 # src/routes/inventory_status_routes.py
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify
-from utils.create_app import db
+from create_app import db
 from models.admin_inventory_status import InventoryStatus
 from forms.admin_inventory_status_form import InventoryStatusForm
 from utils.logging_colors import logger

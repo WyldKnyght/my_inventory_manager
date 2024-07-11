@@ -4,7 +4,7 @@ from models.tab_inventory import InventoryTab
 from models.tab_sale import SaleTab
 from models.admin_customer import Customer
 from forms.tab_sale_form import SaleTabForm
-from utils.create_app import db
+from create_app import db
 from utils.logging_colors import logger
 from decimal import Decimal
 from models.tab_sale_item import SaleItem

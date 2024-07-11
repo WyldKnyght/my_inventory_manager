@@ -1,11 +1,12 @@
 # src/main.py
 from flask import render_template
-from utils.create_app import create_app
+from create_app import create_app
 import webbrowser
 import threading
 import os
+from config import DevelopmentConfig
 
-app = create_app()
+app = create_app(DevelopmentConfig)
 
 @app.route('/')
 def home():

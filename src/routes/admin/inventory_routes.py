@@ -7,7 +7,7 @@ from models.admin_inventory_status import InventoryStatus
 from models.admin_supplier import Supplier
 from forms.admin_inventory_form import InventoryForm
 from database.db_utils import add_item, edit_item, delete_item, list_items
-from utils.create_app import db
+from create_app import db
 from utils.logging_colors import logger
 
 inventory_routes = Blueprint('inventory', __name__)

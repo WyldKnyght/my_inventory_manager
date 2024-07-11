@@ -1,4 +1,6 @@
 m:\dev_env\my_inventory_manager
+├── .admin
+│   └── create_folder_structure.py
 ├── .env
 ├── .gitignore
 ├── LICENSE
@@ -10,6 +12,7 @@ m:\dev_env\my_inventory_manager
 ├── src
 │   ├── __init__.py
 │   ├── config.py
+│   ├── create_app.py
 │   ├── create_db.py
 │   ├── database
 │   │   ├── __init__.py
@@ -44,20 +47,16 @@ m:\dev_env\my_inventory_manager
 │   │   ├── tab_inventory.py
 │   │   ├── tab_purchase.py
 │   │   ├── tab_report.py
-│   │   └── tab_sale.py
+│   │   ├── tab_sale.py
+│   │   └── tab_sale_item.py
 │   ├── routes
-│   │   ├── __init__.py
-│   │   ├── admin_brand_routes.py
-│   │   ├── admin_category_routes.py
-│   │   ├── admin_customer_routes.py
-│   │   ├── admin_inventory_routes.py
-│   │   ├── admin_inventory_status_routes.py
-│   │   ├── admin_supplier_routes.py
-│   │   ├── tab_admin_routes.py
-│   │   ├── tab_inventory_routes.py
-│   │   ├── tab_purchase_routes.py
-│   │   ├── tab_report_routes.py
-│   │   └── tab_sale_routes.py
+│   │   └── tabs
+│   │       ├── __init__.py
+│   │       ├── admin_routes.py
+│   │       ├── inventory_routes.py
+│   │       ├── purchase_routes.py
+│   │       ├── report_routes.py
+│   │       └── sale_routes.py
 │   ├── templates
 │   │   ├── admin_brands.html
 │   │   ├── admin_categories.html
@@ -69,7 +68,11 @@ m:\dev_env\my_inventory_manager
 │   │   ├── admin_suppliers.html
 │   │   ├── base.html
 │   │   ├── index.html
+│   │   ├── inventory_tab_view_item.html
+│   │   ├── inventory_view_item.html
 │   │   ├── macros.html
+│   │   ├── purchase_new_purchase.html
+│   │   ├── purchase_view_purchase.html
 │   │   ├── sale_new_sale.html
 │   │   ├── sale_view_sale.html
 │   │   ├── tab_admin.html
@@ -79,7 +82,6 @@ m:\dev_env\my_inventory_manager
 │   │   └── tab_sale.html
 │   └── utils
 │       ├── __init__.py
-│       ├── create_app.py
 │       ├── logging_colors.py
 │       └── render_pagination.py
 └── static
@@ -95,4 +97,4 @@ m:\dev_env\my_inventory_manager
         ├── admin_supplier.js
         └── scripts.js
 
-Script last modified: 2024-07-10 20:56:02
+Script last modified: 2024-07-11 08:55:56

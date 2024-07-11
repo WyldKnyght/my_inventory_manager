@@ -1,5 +1,5 @@
 # src/models/supplier.py
-from utils.create_app import db
+from create_app import db
 
 class Supplier(db.Model):
     __tablename__ = 'supplier'

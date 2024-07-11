@@ -1,5 +1,5 @@
 # src/models/purchases.py
-from utils.create_app import db
+from create_app import db
 
 class PurchaseTab(db.Model):
     __tablename__ = 'purchase'
