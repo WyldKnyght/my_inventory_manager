@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, request, jsonify, send_file
 from utils.create_app import db
 from models.tab_inventory import InventoryTab
-from models.tab_sale import Sale
+from models.tab_sale import SaleTab
 from models.tab_purchase import Purchase
 from utils.logging_colors import logger
 from sqlalchemy import func
@@ -27,7 +27,7 @@ def sales_report():
     start_date = request.args.get('start_date', default=(datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d'))
     end_date = request.args.get('end_date', default=datetime.now().strftime('%Y-%m-%d'))
     
-    sales = Sale.query.filter(Sale.order_date.between(start_date, end_date)).all()
+    sales = SaleTab.query.filter(SaleTab.order_date.between(start_date, end_date)).all()
     total_sales = sum(sale.total_cost for sale in sales)
     return render_template('sales_report.html', sales=sales, total_sales=total_sales, start_date=start_date, end_date=end_date)
 
@@ -45,7 +45,7 @@ def profit_loss_report():
     start_date = request.args.get('start_date', default=(datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d'))
     end_date = request.args.get('end_date', default=datetime.now().strftime('%Y-%m-%d'))
     
-    sales = db.session.query(func.sum(Sale.total_cost)).filter(Sale.order_date.between(start_date, end_date)).scalar() or 0
+    sales = db.session.query(func.sum(SaleTab.total_cost)).filter(SaleTab.order_date.between(start_date, end_date)).scalar() or 0
     purchases = db.session.query(func.sum(Purchase.total_cost)).filter(Purchase.purchase_date.between(start_date, end_date)).scalar() or 0
     profit = sales - purchases
     
@@ -86,5 +86,5 @@ def api_sales_report():
     start_date = request.args.get('start_date', default=(datetime.now() - timedelta(days=30)).strftime('%Y-%m-%d'))
     end_date = request.args.get('end_date', default=datetime.now().strftime('%Y-%m-%d'))
     
-    sales = Sale.query.filter(Sale.order_date.between(start_date, end_date)).all()
+    sales = SaleTab.query.filter(SaleTab.order_date.between(start_date, end_date)).all()
     return jsonify([sale.to_dict() for sale in sales])

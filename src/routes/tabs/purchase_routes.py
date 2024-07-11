@@ -2,12 +2,9 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request, jsonify, session
 from decimal import Decimal
 from forms.tab_purchase_form import PurchaseTabForm
-from models.admin_inventory import InventoryItem
-from models.admin_category import Category
-from models.admin_supplier import Supplier
-from models.admin_brand import Brand
-from models.admin_inventory_status import InventoryStatus
 from models.tab_purchase import PurchaseTab
+from models.admin_inventory import InventoryItem
+from models.admin_supplier import Supplier
 from utils.create_app import db
 from utils.logging_colors import logger
 
@@ -17,7 +14,7 @@ purchase_tab_routes = Blueprint('purchases', __name__)
 def purchases():
     page = request.args.get('page', 1, type=int)
     purchases = PurchaseTabForm.query.paginate(page=page, per_page=20)
-    return render_template('purchases.html', purchases=purchases)
+    return render_template('tab_purchase.html', purchases=purchases)
 
 @purchase_tab_routes.route('/purchases/new', methods=['GET', 'POST'])
 def new_purchase():

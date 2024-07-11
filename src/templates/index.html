@@ -91,11 +91,11 @@
     <div class="section">
         <h2>Quick Links</h2>
         <div class="button-container">
-            <button onclick="location.href='/sales'">Record a Sale</button>
-            <button onclick="location.href='/purchases'">Record a Purchase</button>
-            <button onclick="location.href='/inventory_tab'">View Inventory</button>
-            <button onclick="location.href='/reports'">Generate Reports</button>
-            <button onclick="location.href='/admin'">Go to Admin Dashboard</button>
+            <button onclick="location.href='{{ url_for('sale_tab.new_sale') }}'">Record a Sale</button>
+            <button onclick="location.href='{{ url_for('purchase_tab.new_purchase') }}'">Record a Purchase</button>
+            <button onclick="location.href='{{ url_for('inventory_tab.inventory') }}'">View Inventory</button>
+            <button onclick="location.href='{{ url_for('report_tab.reports') }}'">Generate Reports</button>
+            <button onclick="location.href='{{ url_for('admin_tab.admin') }}'">Go to Admin Dashboard</button>
         </div>
     </div>
 </div>

@@ -163,5 +163,5 @@ cython_debug/
 
 # Project specific
 .myfiles/
-admin/
+.admin/
 tests/

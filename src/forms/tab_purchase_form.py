@@ -1,6 +1,6 @@
 # src/forms/tab_purchase_form.py
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, IntegerField, SelectField, DecimalField, DateField
+from wtforms import StringField, IntegerField, SelectField, DecimalField, DateField
 from wtforms.validators import DataRequired, NumberRange, Optional
 
 class PurchaseTabForm(FlaskForm):

@@ -1,32 +1,39 @@
-# src/models/sales.py
+# src/models/tab_sale.py
 from utils.create_app import db
+from datetime import datetime, timezone
 
 class SaleTab(db.Model):
     __tablename__ = 'sale'
     __table_args__ = {'extend_existing': True}
     sale_id = db.Column(db.String, primary_key=True)
     sales_order = db.Column(db.String(128), unique=True)
-    product_id = db.Column(db.String, db.ForeignKey('inventory.product_id'))
-    order_date = db.Column(db.Date)
-    ship_delivery_pickup_date = db.Column(db.Date)
     customer_id = db.Column(db.String, db.ForeignKey('customer.customer_id'))
-    quantity = db.Column(db.Integer)
-    retail_price = db.Column(db.Numeric(10, 2))
+    order_date = db.Column(db.DateTime, default=datetime.utcnow)
+    ship_delivery_pickup_date = db.Column(db.Date)
+    total_cost = db.Column(db.Numeric(10, 2))
     shipping = db.Column(db.Numeric(10, 2))
     taxes = db.Column(db.Numeric(10, 2))
-    total_cost = db.Column(db.Numeric(10, 2))
+
+    customer = db.relationship('Customer', backref='sales')
+    items = db.relationship('SaleItem', back_populates='sale', cascade='all, delete-orphan')
+
+    def __init__(self, customer_id, total_cost, shipping=0, taxes=0):
+        self.sale_id = f"SALE-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}"
+        self.sales_order = f"SO-{SaleTab.query.count() + 1:05d}"
+        self.customer_id = customer_id
+        self.total_cost = total_cost
+        self.shipping = shipping
+        self.taxes = taxes
 
     def to_dict(self):
         return {
             'sale_id': self.sale_id,
             'sales_order': self.sales_order,
-            'product_id': self.product_id,
-            'order_date': str(self.order_date),
-            'ship_delivery_pickup_date': str(self.ship_delivery_pickup_date),
             'customer_id': self.customer_id,
-            'quantity': self.quantity,
-            'retail_price': str(self.retail_price),
+            'order_date': self.order_date.isoformat(),
+            'ship_delivery_pickup_date': self.ship_delivery_pickup_date.isoformat() if self.ship_delivery_pickup_date else None,
+            'total_cost': str(self.total_cost),
             'shipping': str(self.shipping),
             'taxes': str(self.taxes),
-            'total_cost': str(self.total_cost)
+            'items': [item.to_dict() for item in self.items]
         }

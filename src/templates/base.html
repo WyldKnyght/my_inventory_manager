@@ -38,11 +38,11 @@
 <body>
     <div class="navbar">
         <a href="{{ url_for('home') }}">Home</a>
-        <a href="{{ url_for('sales') }}">Sales</a>
-        <a href="{{ url_for('Purchases') }}">Purchases</a>
-        <a href="{{ url_for('/inventory_tab') }}">Inventory</a>
-        <a href="{{ url_for('reports') }}">Reports</a>
-        <a href="{{ url_for('/admin') }}">Admin</a>
+        <a href="{{ url_for('sale_tab.sale') }}">Sales</a>
+        <a href="{{ url_for('purchase_tab.purchases') }}">Purchases</a>
+        <a href="{{ url_for('inventory_tab.inventory') }}">Inventory</a>
+        <a href="{{ url_for('report_tab.reports') }}">Reports</a>
+        <a href="{{ url_for('admin_tab.admin') }}">Admin</a>
     </div>
     <main>
         {% block content %}{% endblock %}
