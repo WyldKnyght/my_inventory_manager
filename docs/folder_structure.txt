@@ -1,100 +1,76 @@
 m:\dev_env\my_inventory_manager
-├── .admin
-│   └── create_folder_structure.py
 ├── .env
 ├── .gitignore
+├── .pylintrc
 ├── LICENSE
 ├── README.md
 ├── database
-│   ├── db_tables.sql
-│   └── small_business.db
+│   ├── .db
+│   ├── inventory.db
+│   └── schema.sql
+├── docs
+│   ├── Folder Structure.md
+│   ├── Phase 1 - Core Functionality
+│   │   └── Database Schema.md
+│   ├── Phase 1 - Core Inventory Management.md
+│   ├── Phase 2 - Stock Tracking and Reporting.md
+│   ├── Phase 3 - Merchandise Processing.md
+│   ├── Phase 4 - Collectibles and Trading Cards.md
+│   ├── Phase 5 - Market Value and Advanced Features.md
+│   ├── README.md
+│   ├── folder_structure.txt
+│   ├── project_plans
+│   │   ├── Business Needs and Pain Points.md
+│   │   ├── Crating Your Own Inventory Manager.md
+│   │   ├── Database Schema.md
+│   │   ├── Define Your Requirements.md
+│   │   ├── Objectives.md
+│   │   ├── Project Scope and Objectives.md
+│   │   ├── Technology Stack.md
+│   │   └── project_plan.md
+│   └── user_guide.md
 ├── requirements.txt
 ├── src
-│   ├── __init__.py
-│   ├── config.py
-│   ├── create_app.py
-│   ├── create_db.py
-│   ├── database
-│   │   ├── __init__.py
-│   │   ├── db_add_elements.py
-│   │   ├── db_delete_elements.py
-│   │   ├── db_edit_elements.py
-│   │   ├── db_listing_elements.py
-│   │   └── db_utils.py
-│   ├── forms
-│   │   ├── __init__.py
-│   │   ├── admin_brand_form.py
-│   │   ├── admin_category_form.py
-│   │   ├── admin_customer_form.py
-│   │   ├── admin_inventory_form.py
-│   │   ├── admin_inventory_status_form.py
-│   │   ├── admin_supplier_form.py
-│   │   ├── inventory_form.py
-│   │   ├── tab_inventory_form.py
-│   │   ├── tab_purchase_form.py
-│   │   ├── tab_report_form.py
-│   │   └── tab_sale_form.py
-│   ├── instance
+│   ├── controllers
+│   │   ├── category_controller.py
+│   │   ├── customer_controller.py
+│   │   ├── expense_controller.py
+│   │   ├── item_controller.py
+│   │   ├── purchase_controller.py
+│   │   ├── sales_controller.py
+│   │   └── vendor_controller.py
+│   ├── framework
+│   │   ├── category.py
+│   │   └── item.py
 │   ├── main.py
-│   ├── models
-│   │   ├── __init__.py
-│   │   ├── admin_brand.py
-│   │   ├── admin_category.py
-│   │   ├── admin_customer.py
-│   │   ├── admin_inventory.py
-│   │   ├── admin_inventory_status.py
-│   │   ├── admin_supplier.py
-│   │   ├── tab_inventory.py
-│   │   ├── tab_purchase.py
-│   │   ├── tab_report.py
-│   │   ├── tab_sale.py
-│   │   └── tab_sale_item.py
-│   ├── routes
+│   ├── resources
+│   │   ├── config.json
+│   │   └── styles.qss
+│   ├── user_interface
+│   │   ├── base_widget.py
+│   │   ├── dialogs
+│   │   │   └── add_item_inventory.py
+│   │   ├── product_widget.py
 │   │   └── tabs
-│   │       ├── __init__.py
-│   │       ├── admin_routes.py
-│   │       ├── inventory_routes.py
-│   │       ├── purchase_routes.py
-│   │       ├── report_routes.py
-│   │       └── sale_routes.py
-│   ├── templates
-│   │   ├── admin_brands.html
-│   │   ├── admin_categories.html
-│   │   ├── admin_customer.html
-│   │   ├── admin_inventory.html
-│   │   ├── admin_inventory_add_item.html
-│   │   ├── admin_inventory_edit_item.html
-│   │   ├── admin_inventory_status.html
-│   │   ├── admin_suppliers.html
-│   │   ├── base.html
-│   │   ├── index.html
-│   │   ├── inventory_tab_view_item.html
-│   │   ├── inventory_view_item.html
-│   │   ├── macros.html
-│   │   ├── purchase_new_purchase.html
-│   │   ├── purchase_view_purchase.html
-│   │   ├── sale_new_sale.html
-│   │   ├── sale_view_sale.html
-│   │   ├── tab_admin.html
-│   │   ├── tab_inventory.html
-│   │   ├── tab_purchase.html
-│   │   ├── tab_report.html
-│   │   └── tab_sale.html
+│   │       ├── inventory_tab.py
+│   │       ├── iten_view.py
+│   │       ├── main_tab.py
+│   │       ├── purchases_tab.py
+│   │       ├── reports_tab.py
+│   │       ├── sales_tab.py
+│   │       └── settings_tab.py
 │   └── utils
-│       ├── __init__.py
-│       ├── logging_colors.py
-│       └── render_pagination.py
-└── static
-    ├── css
-    │   ├── admin_inventory.css
-    │   └── styles.css
-    ├── favicon.ico
-    └── js
-        ├── admin_brand.js
-        ├── admin_category.js
-        ├── admin_inventory.js
-        ├── admin_status.js
-        ├── admin_supplier.js
-        └── scripts.js
+│       ├── create_db_tables.py
+│       ├── database.py
+│       ├── helpers.py
+│       └── logger.py
+└── tests
+    ├── category_view.py
+    ├── item_view.py
+    ├── main_temp.py
+    ├── main_window.py
+    ├── temp_main.py
+    ├── test_categories.py
+    └── test_items.py
 
-Script last modified: 2024-07-11 08:55:56
+Script last modified: 2024-08-15 13:43:20

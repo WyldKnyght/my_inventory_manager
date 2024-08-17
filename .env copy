@@ -1,0 +1,6 @@
+# .env
+
+SECRET_KEY=you-will-never-guess
+
+# Database Path
+DB_PATH=your_path/inventory.db

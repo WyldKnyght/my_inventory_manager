@@ -1,0 +1,14 @@
+{
+    "main_window": {
+        "width": 809,
+        "height": 521,
+        "title": "Inventory Management System"
+    },
+    "tab_widget": {
+        "tab_order": ["Main", "Inventory", "Sales", "Purchases", "Reports", "Settings"]
+    },
+    "layout": {
+        "group_box_height": 80,
+        "padding": 10
+    }
+}

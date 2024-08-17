@@ -1,0 +1,73 @@
+/* styles.qss */
+QWidget {
+    background-color: #A7C6ED; /* Light Blue Violet background */
+    font-family: Arial;
+    font-size: 12px;
+}
+
+QGroupBox {
+    font-weight: bold;
+    border: 2px solid #4F8CC9; /* Medium Delft Blue border */
+    border-radius: 5px;
+    margin-top: 10px; /* Leave space for the title */
+}
+
+QGroupBox::title {
+    margin-left: 5px /* Set the origin for positioning */
+    padding: 0 3px;
+    color: #005EB8; /* Dark Delft Blue for title */
+}
+
+QLabel {
+    color: #003D7A; /* Very Dark Cornflower Blue text */
+}
+
+QComboBox {
+    background-color: #B0D0E8; /* Light shade of Medium Delft Blue */
+    border: 1px solid #4F8CC9; /* Medium Delft Blue border */
+    border-radius: 3px;
+    padding: 3px;
+    color: #003D7A; /* Darker text color for combo box */
+}
+
+QPushButton {
+    background-color: #005EB8; /* Royal Blue button */
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+    background-color: #001F4D; /* Dark Navy Blue on hover */
+}
+
+QLineEdit {
+    border: 1px solid #4F8CC9; /* Medium Delft Blue border */
+    padding: 5px;
+    border-radius: 3px;
+}
+
+QTabBar::tab {
+    background: #A7C6ED; /* Light Blue Violet background for tabs */
+    border: 2px solid #4F8CC9; /* Medium Delft Blue border */
+    border-top-left-radius: 5px; /* Rounded top-left corner */
+    border-top-right-radius: 5px; /* Rounded top-right corner */
+    border-bottom: none; /* Remove bottom border for inactive tabs */
+    padding: 10px;
+    margin-right: 2px; /* Space between tabs */
+}
+
+QTabBar::tab:selected {
+    background: #4F8CC9; /* Medium Delft Blue for selected tab */
+    color: white; /* White text for selected tab */
+    border-bottom-color: transparent; /* Blend with the pane */
+}
+
+QTabBar::tab:hover {
+    background: #B0D0E8; /* Light shade of Medium Delft Blue on hover */
+}
+
+QTabWidget::pane {
+    border: 2px solid #4F8CC9; /* Medium Delft Blue border for the pane */
+    border-top: none; /* Remove top border to blend with tabs */
+}
