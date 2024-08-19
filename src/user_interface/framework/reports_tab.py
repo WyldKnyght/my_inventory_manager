@@ -1,4 +1,4 @@
-from user_interface.base_widget import BaseWidget
+from user_interface.framework.base_widget import BaseWidget
 
 class ReportsTab(BaseWidget):
     def __init__(self, parent=None):

@@ -18,8 +18,8 @@
   - Dimensions of the item (Length x Width x Height).
 - **weight**: REAL
   - Weight of the item.
-- **manufacturer_id**: INTEGER REFERENCES Manufacturer(manufacturer_id)
-  - Foreign key linking to the Manufacturer table.
+- **company_id**: INTEGER REFERENCES Company(company_id)
+  - Foreign key linking to the Company table.
 - **brand_id**: INTEGER REFERENCES Brand(brand_id)
   - Foreign key linking to the Brand table.
 - **upc**: TEXT UNIQUE

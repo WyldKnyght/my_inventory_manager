@@ -31,8 +31,6 @@ def execute_query(query, params=None):
     finally:
         conn.close()
 
-
-
 def fetch_all(query):
     """Fetch all rows from a query and return as a list of dictionaries."""
     connection = get_connection()
@@ -44,3 +42,12 @@ def fetch_all(query):
     cursor.close()
     connection.close()
     return data
+
+def get_table_columns(table_name):
+    """Retrieve column names and auto-increment status for a given table."""
+    connection = get_connection()
+    cursor = connection.cursor()
+    cursor.execute(f"PRAGMA table_info({table_name})")
+    columns = [(column[1], column[5]) for column in cursor.fetchall()]  # (name, is_auto_increment)
+    connection.close()
+    return columns

@@ -1,7 +1,8 @@
-from user_interface.base_widget import BaseWidget
+# src/user_interface/framework/home_tab.py
+from user_interface.framework.base_widget import BaseWidget
 from PyQt6 import QtWidgets
 
-class MainTab(BaseWidget):
+class HomeTab(BaseWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setup_ui()
@@ -12,7 +13,7 @@ class MainTab(BaseWidget):
 
         # Top Section: Time Frame
         time_frame_group = self.create_group_box("Time Frame")
-        time_frame_layout = self.create_grid_layout()
+        time_frame_layout = QtWidgets.QGridLayout()
         time_frame_group.setLayout(time_frame_layout)
 
         self.time_frame_combo_box = QtWidgets.QComboBox(self)
@@ -31,9 +32,14 @@ class MainTab(BaseWidget):
 
         # Sales Activity Group
         sales_activity_group = self.create_group_box("Sales Activity")
-        sales_activity_layout = self.create_grid_layout()
+        sales_activity_layout = QtWidgets.QGridLayout()
         sales_activity_group.setLayout(sales_activity_layout)
 
+        # Ensure these components resize with the window
+        sales_activity_group.setSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+
+        # Add the layout to the bottom
+        bottom_layout.addWidget(sales_activity_group)
         # Add labels to the sales activity grid
         sales_labels = [
             ("To be Packed", "1"),
@@ -42,8 +48,6 @@ class MainTab(BaseWidget):
             ("To be Picked Up", "4")
         ]
         self.add_labels_to_grid(sales_activity_layout, sales_labels)
-
-        bottom_layout.addWidget(sales_activity_group, 1)
 
         # Top Selling Products Group
         top_selling_products_group = self.create_group_box("Top Selling Products")
@@ -54,8 +58,9 @@ class MainTab(BaseWidget):
         top_selling_products = [f"#{i} Item" for i in range(1, 6)]
         self.add_labels_to_layout(top_selling_products_layout, top_selling_products)
 
-        bottom_layout.addWidget(top_selling_products_group, 2)
+        bottom_layout.addWidget(top_selling_products_group)
 
+        # Add the bottom_layout to main_layout only once
         main_layout.addLayout(bottom_layout)
 
         # Section 3: Product Details, Inventory Summary, Purchase Orders
@@ -107,6 +112,7 @@ class MainTab(BaseWidget):
 
         bottom_section_layout.addWidget(purchase_orders_group)
 
+        # Add bottom_section_layout to main_layout instead of bottom_layout
         main_layout.addLayout(bottom_section_layout)
 
     def add_labels_to_grid(self, layout, labels, font_size=8):

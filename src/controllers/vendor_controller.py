@@ -1,4 +1,4 @@
-from src.utils.database import execute_query, fetch_all
+from utils.database import execute_query, fetch_all
 
 def create_vendor(vendor_data):
     """Create a new vendor in the Vendor table."""

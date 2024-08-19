@@ -1,29 +1,68 @@
+CREATE TABLE Category (
+    category_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    category_name TEXT
+);
+
+CREATE TABLE Brand (
+    brand_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    brand_name TEXT
+);
+
+CREATE TABLE Company (
+    company_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    company_name TEXT
+);
+
+CREATE TABLE Vendor (
+    vendor_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    company_name TEXT,
+    primary_contact TEXT,
+    email TEXT,
+    phone TEXT,
+    website TEXT
+);
+
+CREATE TABLE Customer (
+    customer_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    customer_first_name TEXT,
+    customer_last_name TEXT,
+    customer_email TEXT,
+    customer_phone TEXT,
+    customer_address TEXT
+);
+
+CREATE TABLE Accounts (
+    account_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    account_name TEXT,
+    account_type TEXT,
+    account_description TEXT
+);
+
 CREATE TABLE Products (
     product_id INTEGER PRIMARY KEY AUTOINCREMENT,
     product_number TEXT UNIQUE NOT NULL,
     product_name TEXT,
     product_description TEXT,
-    unit_type TEXT CHECK(unit_type IN ('box', 'cm', 'in', 'kg', 'lb', 'pcs')),
-    product_category_id INTEGER,
-    sku TEXT,
-    manufacturer_id INTEGER,
-    brand_id INTEGER,
-    product_size TEXT,
-    product_color TEXT,
-    dimensions TEXT,
-    product_weight REAL,
     upc TEXT UNIQUE,
+    company_name TEXT,
+    brand_name TEXT,
+    category_name TEXT,
+    theme TEXT,
+    product_character TEXT,
+    product_height REAL,
+    product_width REAL,
+    product_length REAL,
+    product_size REAL,
+    product_weight_unit TEXT CHECK(product_weight_unit IN ('g', 'kg', 'oz','lb')),
+    product_color TEXT,
     cost_price REAL,
     selling_price REAL,
     quantity INTEGER,
-    FOREIGN KEY (product_category_id) REFERENCES Categories(product_category_id),
-    FOREIGN KEY (manufacturer_id) REFERENCES Manufacturer(manufacturer_id),
-    FOREIGN KEY (brand_id) REFERENCES Brand(brand_id)
-);
-
-CREATE TABLE Categories (
-    product_category_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    product_category_name TEXT
+    unit_type TEXT CHECK(unit_type IN ('box', 'cm', 'in', 'kg', 'lb', 'pcs')),
+    discontinued BOOLEAN,
+    FOREIGN KEY (category_name) REFERENCES Category(category_name),
+    FOREIGN KEY (company_name) REFERENCES Company(company_name),
+    FOREIGN KEY (brand_name) REFERENCES Brand(brand_name)
 );
 
 CREATE TABLE Sales (
@@ -51,17 +90,19 @@ CREATE TABLE Product_Sales (
 CREATE TABLE Purchases (
     purchase_id INTEGER PRIMARY KEY AUTOINCREMENT,
     vendor_id INTEGER,
-    purchase_date DATE,
+    vendor_order_number TEXT,
     purchase_order_number TEXT UNIQUE,
+    purchase_date DATE,
     purchase_amount REAL,
+    taxes REAL,
+    discount REAL,
+    customs_fees REAL,
+    currency TEXT CHECK(currency IN ('CAD', 'USD')),  -- Constraint for currency
+    purchase_status TEXT CHECK(purchase_status IN ('Pending', 'Shipped', 'Delivered')),
     payment_method TEXT,
-    product_id INTEGER,
     shipping_cost REAL,
     shipping_date DATE,
-    customs_fees REAL,
     reference TEXT,
-    estimated_delivery_date DATE,
-    FOREIGN KEY (product_id) REFERENCES Products(product_id),
     FOREIGN KEY (vendor_id) REFERENCES Vendor(vendor_id)
 );
 
@@ -83,39 +124,4 @@ CREATE TABLE Expense (
     notes TEXT,
     FOREIGN KEY (vendor_id) REFERENCES Vendor(vendor_id),
     FOREIGN KEY (account_id) REFERENCES Accounts(account_id)
-);
-
-CREATE TABLE Customer (
-    customer_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    customer_first_name TEXT,
-    customer_last_name TEXT,
-    customer_email TEXT,
-    customer_phone TEXT,
-    customer_address TEXT
-);
-
-CREATE TABLE Brand (
-    brand_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    brand_name TEXT
-);
-
-CREATE TABLE Manufacturer (
-    manufacturer_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    manufacturer_name TEXT
-);
-
-CREATE TABLE Vendor (
-    vendor_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    company_name TEXT,
-    primary_contact TEXT,
-    email TEXT,
-    phone TEXT,
-    website TEXT
-);
-
-CREATE TABLE Accounts (
-    account_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    account_name TEXT,
-    account_type TEXT,
-    account_description TEXT
 );

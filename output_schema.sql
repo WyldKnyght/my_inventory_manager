@@ -4,9 +4,9 @@ CREATE TABLE Products (
     product_name TEXT,
     product_description TEXT,
     unit_type TEXT CHECK(unit_type IN ('box', 'cm', 'in', 'kg', 'lb', 'pcs')),
-    product_category_id INTEGER,
+    category_id INTEGER,
     sku TEXT,
-    manufacturer_id INTEGER,
+    company_id INTEGER,
     brand_id INTEGER,
     product_size TEXT,
     product_color TEXT,
@@ -16,14 +16,14 @@ CREATE TABLE Products (
     cost_price REAL,
     selling_price REAL,
     quantity INTEGER,
-    FOREIGN KEY (product_category_id) REFERENCES Categories(product_category_id),
-    FOREIGN KEY (manufacturer_id) REFERENCES Manufacturer(manufacturer_id),
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id),
+    FOREIGN KEY (company_id) REFERENCES Company(company_id),
     FOREIGN KEY (brand_id) REFERENCES Brand(brand_id)
 );
 
 CREATE TABLE Categories (
-    product_category_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    product_category_name TEXT
+    category_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    category_name TEXT
 );
 
 CREATE TABLE Sales (
@@ -99,9 +99,9 @@ CREATE TABLE Brand (
     brand_name TEXT
 );
 
-CREATE TABLE Manufacturer (
-    manufacturer_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    manufacturer_name TEXT
+CREATE TABLE Company (
+    company_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    company_name TEXT
 );
 
 CREATE TABLE Vendor (
