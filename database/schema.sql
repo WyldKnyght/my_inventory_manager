@@ -1,19 +1,9 @@
-CREATE TABLE Category (
+CREATE TABLE Categories (
     category_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    category_name TEXT
+    category_name TEXT UNIQUE
 );
 
-CREATE TABLE Brand (
-    brand_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    brand_name TEXT
-);
-
-CREATE TABLE Company (
-    company_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    company_name TEXT
-);
-
-CREATE TABLE Vendor (
+CREATE TABLE Vendors (
     vendor_id INTEGER PRIMARY KEY AUTOINCREMENT,
     company_name TEXT,
     primary_contact TEXT,
@@ -22,7 +12,7 @@ CREATE TABLE Vendor (
     website TEXT
 );
 
-CREATE TABLE Customer (
+CREATE TABLE Customers (
     customer_id INTEGER PRIMARY KEY AUTOINCREMENT,
     customer_first_name TEXT,
     customer_last_name TEXT,
@@ -38,31 +28,41 @@ CREATE TABLE Accounts (
     account_description TEXT
 );
 
-CREATE TABLE Products (
-    product_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    product_number TEXT UNIQUE NOT NULL,
-    product_name TEXT,
+CREATE TABLE Settings (
+    setting_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    default_dimension_unit TEXT CHECK(default_dimension_unit IN ('cm', 'in')),
+    default_currency TEXT CHECK(default_currency IN ('CAD', 'USD'))
+);
+
+CREATE TABLE UnitTypes (
+    unit_type_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    unit_type TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE Catalog (
+    item_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    item_number TEXT UNIQUE NOT NULL,
+    item_name TEXT,
     product_description TEXT,
     upc TEXT UNIQUE,
-    company_name TEXT,
-    brand_name TEXT,
-    category_name TEXT,
+    manufacturer TEXT,
+    brand_name TEXT,  
+    category_id INTEGER,
     theme TEXT,
     product_character TEXT,
     product_height REAL,
     product_width REAL,
     product_length REAL,
     product_size REAL,
-    product_weight_unit TEXT CHECK(product_weight_unit IN ('g', 'kg', 'oz','lb')),
+    product_weight REAL,
     product_color TEXT,
     cost_price REAL,
     selling_price REAL,
     quantity INTEGER,
-    unit_type TEXT CHECK(unit_type IN ('box', 'cm', 'in', 'kg', 'lb', 'pcs')),
+    unit_type_id INTEGER,
     discontinued BOOLEAN,
-    FOREIGN KEY (category_name) REFERENCES Category(category_name),
-    FOREIGN KEY (company_name) REFERENCES Company(company_name),
-    FOREIGN KEY (brand_name) REFERENCES Brand(brand_name)
+    FOREIGN KEY (unit_type_id) REFERENCES UnitTypes(unit_type_id),
+    FOREIGN KEY (category_id) REFERENCES Categories(category_id)  
 );
 
 CREATE TABLE Sales (
@@ -75,7 +75,7 @@ CREATE TABLE Sales (
     adjustment REAL,
     sales_total REAL,
     customer_notes TEXT,
-    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
 
 CREATE TABLE Product_Sales (
@@ -84,7 +84,7 @@ CREATE TABLE Product_Sales (
     product_id INTEGER,
     quantity INTEGER,
     FOREIGN KEY (sales_id) REFERENCES Sales(sales_id),
-    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+    FOREIGN KEY (product_id) REFERENCES Catalog(item_id)  -- Updated foreign key reference
 );
 
 CREATE TABLE Purchases (
@@ -97,13 +97,13 @@ CREATE TABLE Purchases (
     taxes REAL,
     discount REAL,
     customs_fees REAL,
-    currency TEXT CHECK(currency IN ('CAD', 'USD')),  -- Constraint for currency
+    currency TEXT CHECK(currency IN ('CAD', 'USD')),  
     purchase_status TEXT CHECK(purchase_status IN ('Pending', 'Shipped', 'Delivered')),
     payment_method TEXT,
     shipping_cost REAL,
     shipping_date DATE,
     reference TEXT,
-    FOREIGN KEY (vendor_id) REFERENCES Vendor(vendor_id)
+    FOREIGN KEY (vendor_id) REFERENCES Vendors(vendor_id)
 );
 
 CREATE TABLE Product_Purchases (
@@ -112,16 +112,16 @@ CREATE TABLE Product_Purchases (
     product_id INTEGER,
     quantity INTEGER,
     FOREIGN KEY (purchase_id) REFERENCES Purchases(purchase_id),
-    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+    FOREIGN KEY (product_id) REFERENCES Catalog(item_id)
 );
 
-CREATE TABLE Expense (
+CREATE TABLE Expenses (
     expense_id INTEGER PRIMARY KEY AUTOINCREMENT,
     expense_date DATE,
-    account_id TEXT,
+    account_id INTEGER, 
     amount REAL,
     vendor_id INTEGER,
     notes TEXT,
-    FOREIGN KEY (vendor_id) REFERENCES Vendor(vendor_id),
+    FOREIGN KEY (vendor_id) REFERENCES Vendors(vendor_id),
     FOREIGN KEY (account_id) REFERENCES Accounts(account_id)
 );

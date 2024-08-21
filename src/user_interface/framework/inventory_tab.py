@@ -1,52 +1,43 @@
+# src/user_interface/tabs/inventory_tab.py
+
 from PyQt6 import QtWidgets
 from user_interface.framework.base_widget import BaseWidget
 from controllers.inventory_controller import InventoryController
+from utils.ui_helpers import configure_table_headers, populate_table_with_data
 
 class InventoryTab(BaseWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.product_controller = InventoryController()  
+        self.inventory_controller = InventoryController()
         self.setup_ui()
-        self.load_products()
+        self.load_catalog()
 
     def setup_ui(self):
         """Set up the UI components for the Inventory tab."""
-        main_layout = QtWidgets.QVBoxLayout(self)
-        self.setLayout(main_layout)
+        main_layout = self.create_vertical_layout(self)
+        self.catalog_table = self.create_catalog_table()
+        main_layout.addWidget(self.catalog_table)
 
-        # Table to display inventory products
-        self.products_table = QtWidgets.QTableWidget(self)
-        self.products_table.setColumnCount(7)
-        self.products_table.setHorizontalHeaderLabels([
-            'Product Number', 'Product Name', 'Type', 'Description', 
-            'Actual Cost', 'Selling Price', 'Stock'
-        ])
-        # Ensure the table resizes dynamically
-        self.products_table.setSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+    def create_catalog_table(self) -> QtWidgets.QTableWidget:
+        """Create and configure the catalog table."""
+        table = QtWidgets.QTableWidget(self)
+        table.setSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        table.setSortingEnabled(True)
+        return table
 
-        main_layout.addWidget(self.products_table)
-
-        # Enable sorting
-        self.products_table.setSortingEnabled(True)
-
-    def load_products(self):
-        """Load products from the database and display them in the table."""
+    def load_catalog(self):
+        """Load catalog data from the database and display it in the table."""
         try:
-            products = self.product_controller.get_all_products()
-            self.products_table.setRowCount(len(products))
-            self.products_table.setUpdatesEnabled(False)  # Disable updates for batch processing
-            for row, product in enumerate(products):
-                self.populate_table_row(row, product)
-            self.products_table.setUpdatesEnabled(True)  # Re-enable updates
+            column_headers, catalog_items = self.inventory_controller.get_data_by_table("Catalog")
+            self.display_catalog(column_headers, catalog_items)
         except Exception as e:
-            QtWidgets.QMessageBox.critical(self, "Error", f"Failed to load products: {e}")
+            self.show_error_message(str(e))
 
-    def populate_table_row(self, row, product):
-        """Populate a table row with product data."""
-        self.products_table.setItem(row, 0, QtWidgets.QTableWidgetItem(product['product_number']))
-        self.products_table.setItem(row, 1, QtWidgets.QTableWidgetItem(product['product_name']))
-        self.products_table.setItem(row, 2, QtWidgets.QTableWidgetItem(str(product['category_id'])))  # Display category ID
-        self.products_table.setItem(row, 3, QtWidgets.QTableWidgetItem(product['product_description']))
-        self.products_table.setItem(row, 4, QtWidgets.QTableWidgetItem(str(product['actual_cost'])))
-        self.products_table.setItem(row, 5, QtWidgets.QTableWidgetItem(str(product['selling_price'])))
-        self.products_table.setItem(row, 6, QtWidgets.QTableWidgetItem(str(product['quantity'])))
+    def display_catalog(self, column_headers, catalog_items):
+        """Display the catalog items in the table."""
+        configure_table_headers(self.catalog_table, column_headers)
+        populate_table_with_data(self.catalog_table, catalog_items, column_headers)
+
+    def show_error_message(self, message: str):
+        """Display an error message."""
+        QtWidgets.QMessageBox.critical(self, "Error", message)

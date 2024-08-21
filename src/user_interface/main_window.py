@@ -3,53 +3,38 @@
 from PyQt6 import QtWidgets
 from user_interface.framework.home_tab import HomeTab
 from user_interface.framework.inventory_tab import InventoryTab
-from user_interface.framework.sales_tab import SalesTab
-from user_interface.framework.purchases_tab import PurchasesTab
-from user_interface.framework.reports_tab import ReportsTab
 from user_interface.framework.settings_tab import SettingsTab
+from user_interface.framework.purchases_tab import PurchasesTab
 
 class MainWindow(QtWidgets.QMainWindow):
-    def __init__(self, config):
+    def __init__(self):
         super().__init__()
-        self.config = config
+        self.setWindowTitle("Simple PyQt Application")
+        self.resize(800, 600)
         self.setup_ui()
 
     def setup_ui(self):
-        screen_geometry = QtWidgets.QApplication.primaryScreen().geometry()
-        screen_width = screen_geometry.width()
-        screen_height = screen_geometry.height()
-
-        self.setObjectName("MainWindow")
-        self.resize(self.config['main_window']['width'], self.config['main_window']['height'])
-        self.setWindowTitle(self.config['main_window']['title'])
-
-        self.setMinimumSize(800, 600)
-        self.setMaximumSize(screen_width, screen_height)
-
+        """Set up the main UI components."""
         central_widget = QtWidgets.QWidget(self)
         self.setCentralWidget(central_widget)
 
         main_layout = QtWidgets.QVBoxLayout(central_widget)
-
-        tab_widget = QtWidgets.QTabWidget(central_widget)
-        tab_widget.setSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        tab_widget = self.create_tab_widget(central_widget)
         main_layout.addWidget(tab_widget)
 
-        tabs = {
-            "Home": HomeTab(),
-            "Inventory": InventoryTab(),
-            "Sales": SalesTab(),
-            "Purchases": PurchasesTab(),
-            "Reports": ReportsTab(),
-            "Settings": SettingsTab()
-        }
+    def create_tab_widget(self, parent):
+        """Create and configure the tab widget with all necessary tabs."""
+        tab_widget = QtWidgets.QTabWidget(parent)
+        self.add_tabs(tab_widget)
+        return tab_widget
 
-        for tab_name in self.config['tab_widget'].get('tab_order', []):
-            if tab_name in tabs:
-                tab_widget.addTab(tabs[tab_name], tab_name)
-
-        self.menu_bar = QtWidgets.QMenuBar(self)
-        self.setMenuBar(self.menu_bar)
-
-        self.status_bar = QtWidgets.QStatusBar(self)
-        self.setStatusBar(self.status_bar)
+    def add_tabs(self, tab_widget):
+        """Add all tabs to the tab widget."""
+        tabs = [
+            (HomeTab(), "Home"),
+            (InventoryTab(), "Inventory"),
+            (SettingsTab(), "Settings"),
+            (PurchasesTab(), "Purchases"),
+        ]
+        for tab, name in tabs:
+            tab_widget.addTab(tab, name)

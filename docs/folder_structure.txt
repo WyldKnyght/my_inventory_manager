@@ -9,74 +9,58 @@ m:\dev_env\my_inventory_manager
 │   ├── inventory.db
 │   └── schema.sql
 ├── docs
-│   ├── Folder Structure.md
-│   ├── Phase 1 - Core Functionality
-│   │   └── Database Schema.md
-│   ├── Phase 1 - Core Inventory Management.md
-│   ├── Phase 2 - Stock Tracking and Reporting.md
-│   ├── Phase 3 - Merchandise Processing.md
-│   ├── Phase 4 - Collectibles and Trading Cards.md
-│   ├── Phase 5 - Market Value and Advanced Features.md
-│   ├── README.md
 │   ├── folder_structure.txt
-│   ├── project_plans
-│   │   ├── Business Needs and Pain Points.md
-│   │   ├── Crating Your Own Inventory Manager.md
-│   │   ├── Database Schema.md
-│   │   ├── Define Your Requirements.md
-│   │   ├── Objectives.md
-│   │   ├── Project Scope and Objectives.md
-│   │   ├── Technology Stack.md
-│   │   └── project_plan.md
-│   └── user_guide.md
-├── output_schema.sql
+│   └── structure_definition.md
 ├── requirements.txt
 ├── src
 │   ├── __init__.py
 │   ├── controllers
 │   │   ├── __init__.py
-│   │   ├── category_controller.py
-│   │   ├── customer_controller.py
-│   │   ├── expense_controller.py
-│   │   ├── manage_table_controller.py
-│   │   ├── product_controller.py
-│   │   ├── purchase_controller.py
+│   │   ├── database_controller.py
+│   │   ├── inventory_controller.py
+│   │   ├── purchases_controller.py
 │   │   ├── sales_controller.py
-│   │   └── vendor_controller.py
+│   │   └── settings_controller.py
 │   ├── main.py
 │   ├── resources
-│   │   ├── config.json
-│   │   └── styles.qss
+│   │   ├── logging_config.yaml
+│   │   ├── styles.qss
+│   │   └── table_mappings.json
 │   ├── user_interface
 │   │   ├── __init__.py
 │   │   ├── dialogs
 │   │   │   ├── __init__.py
-│   │   │   ├── general_dialog.py
+│   │   │   ├── common
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── action_buttons_dialog.py
+│   │   │   │   ├── data_table_dialog.py
+│   │   │   │   ├── error_warning_dialog.py
+│   │   │   │   ├── generic_management_dialog.py
+│   │   │   │   └── get_primary_keys.py
 │   │   │   ├── inventory
-│   │   │   │   ├── add_product_dialog.py
-│   │   │   │   └── edit_inventory_dialog.py
-│   │   │   ├── inventory_dialog.py
-│   │   │   ├── manage_table_dialog.old
-│   │   │   ├── manage_table_dialog.py
+│   │   │   │   └── __init__.py
 │   │   │   ├── purchases
-│   │   │   │   ├── financial_summary_section.py
-│   │   │   │   ├── general_info_section.py
-│   │   │   │   ├── order_products_section.py
-│   │   │   │   └── purchase_order_dialog.py
-│   │   │   ├── purchases_dialog.py
-│   │   │   ├── record_dialog.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── purchases_dialog.py
+│   │   │   ├── record_dialog
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── base_record_dialog.py
+│   │   │   │   └── inventory_record_dialog.py
 │   │   │   ├── reports
-│   │   │   ├── reports_dialog.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── reports_dialog.py
 │   │   │   ├── sales
-│   │   │   ├── sales_dialog.py
-│   │   │   ├── settings
-│   │   │   └── user_interface_dialog.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── sales_dialog.py
+│   │   │   └── settings
+│   │   │       ├── __init__.py
+│   │   │       ├── inventory_management_dialog.py
+│   │   │       └── settings_dialog.py
 │   │   ├── framework
 │   │   │   ├── __init__.py
 │   │   │   ├── base_widget.py
 │   │   │   ├── home_tab.py
 │   │   │   ├── inventory_tab.py
-│   │   │   ├── product_view.py
 │   │   │   ├── purchases_tab.py
 │   │   │   ├── reports_tab.py
 │   │   │   ├── sales_tab.py
@@ -84,18 +68,54 @@ m:\dev_env\my_inventory_manager
 │   │   └── main_window.py
 │   └── utils
 │       ├── __init__.py
-│       ├── config_loader.py
 │       ├── create_db_tables.py
-│       ├── database.py
-│       ├── helpers.py
-│       └── logger.py
+│       ├── database_helpers.py
+│       ├── field_helpers.py
+│       ├── logging_colors.py
+│       └── ui_helpers.py
 └── tests
+    ├── add_item_dialog.py
+    ├── add_product_dialog.py
+    ├── config_loader.py
     ├── currency_test.py
     ├── currency_text_2.py
+    ├── data_formatter.py
+    ├── data_preparation.py
+    ├── database (2).py
+    ├── database.py
+    ├── database_controller.py
+    ├── edit_inventory_dialog.py
+    ├── field_creators.py
+    ├── helpers.py
+    ├── inventory_controller.py
+    ├── inventory_dialog.py
     ├── main_temp.py
     ├── main_window.py
+    ├── manage_table_dialog.old
+    ├── product_management_logic.py
+    ├── product_view.py
     ├── product_widget.py
+    ├── query_builder.py
+    ├── record_dialog.py
     ├── sections
-    └── temp_main.py
+    ├── settings_tab.py
+    ├── table_manager.py
+    ├── temp-today
+    │   ├── category_controller.py
+    │   ├── config.json
+    │   ├── customer_controller.py
+    │   ├── expense_controller.py
+    │   ├── financial_summary_section.py
+    │   ├── general_info_section.py
+    │   ├── manage_table_controller.py
+    │   ├── manage_table_dialog.py
+    │   ├── order_products_section.py
+    │   ├── product_management_controller.py
+    │   ├── purchase_controller.py
+    │   ├── purchase_order_dialog.py
+    │   ├── sales_controller.py
+    │   └── vendor_controller.py
+    ├── temp_main.py
+    └── validation.py
 
-Script last modified: 2024-08-18 13:51:43
+Script last modified: 2024-08-21 17:27:00
