@@ -1,0 +1,122 @@
+# src/configs/ui_config.yaml
+ui:
+  # General UI settings
+  main_window_size: [1200, 800]
+  dialog_size: [1000, 800]
+  font_size: 12
+  button_height: 30
+  padding: 10
+  default_font_size: 12
+
+  # Colors for UI elements
+  colors:
+    background: "#A7C6ED"
+    background_light: "#E6F2FF"
+    primary: "#4F8CC9"
+    secondary: "#B0D0E8"
+    text: "#003D7A"
+
+  # Window and dialog titles
+  main_window_title: "Inventory Management System"
+  dialog_titles:
+    settings: "General Settings"
+    purchase_order: "Purchase Order"
+    inventory: "Inventory Management"
+    edit_record: "Edit Record"
+    delete_record: "Delete Record"
+    confirm_deletion: "Confirm Deletion"
+
+  # Tab and subtab titles
+  tab_titles:
+    home: "Home"
+    inventory: "Inventory"
+    purchases: "Purchases"
+    reports: "Reports"
+    sales: "Sales"
+    settings: "Settings"
+  subtab_titles:
+    purchases: "Purchases"
+    expenses: "Expenses"
+
+  # Group box titles
+  group_titles:
+    search: "Search"
+    catalog: "Inventory Catalog"
+    purchases: "Purchases"
+    actions: "Actions"
+    data_management: "Data Management"
+    app_settings: "Application Settings"
+
+  # Placeholder texts for various UI elements
+  placeholders:
+    settings: "General settings configuration goes here."
+    search: "Search..."
+    expenses: "Expenses tab content will be implemented here."
+    app_settings: "Application settings will be added here."
+
+  # Button texts and configurations
+  button_texts:
+    add: "Add"
+    edit: "Edit"
+    delete: "Delete"
+    save: "Save"
+    cancel: "Cancel"
+  action_button_labels:
+    add: "Add"
+    edit: "Edit"
+    delete: "Delete"
+    exit: "Exit"
+  dialog_button_labels:
+    save: "Save"
+    cancel: "Cancel"
+  button_config:
+    - ["Manage Categories", "Categories"]
+    - ["Manage Catalog", "Catalog"]
+    - ["Manage Unit Types", "UnitTypes"]
+
+  # Message box titles
+  message_titles:
+    error: "Error"
+    warning: "Warning"
+    info: "Information"
+    confirm: "Confirm"
+
+  # Table settings
+  table_headers:
+    purchase_order_items: ["Product", "Quantity", "Unit Price", "Total", ""]
+    inventory: ["ID", "Item Number", "Name", "Description", "Quantity", "Price"]
+
+  # Form field sizes
+  field_widths:
+    short: 100
+    medium: 200
+    long: 300
+
+  # Currency and units
+  currencies: ["CAD", "USD"]
+  purchase_statuses: ["Pending", "Shipped", "Delivered"]
+  dimension_units: ["cm", "in"]
+  weight_units: ["kg", "lb"]
+
+  # UI element styles
+  button_style: |
+    QPushButton {
+        background-color: #4a86e8;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+    }
+    QPushButton:hover {
+        background-color: #3a76d8;
+    }
+  table_style: |
+    QTableWidget {
+        background-color: #ffffff;
+        alternate-background-color: #f0f0f0;
+    }
+    QHeaderView::section {
+        background-color: #4a86e8;
+        color: white;
+        padding: 5px;
+    }

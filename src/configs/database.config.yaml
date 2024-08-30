@@ -1,0 +1,20 @@
+# src\configs\database.config.yaml
+database:
+  queries:
+    purchases:
+      add_purchase: |
+        INSERT INTO Purchases (vendor_id, vendor_order_number, purchase_order_number, purchase_date, purchase_amount,
+                                taxes, discount, customs_fees, currency, purchase_status, payment_method, shipping_cost,
+                                shipping_date, reference)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      update_purchase: |
+        UPDATE Purchases SET
+            vendor_id = ?, vendor_order_number = ?, purchase_date = ?, purchase_amount = ?,
+            taxes = ?, discount = ?, customs_fees = ?, currency = ?, purchase_status = ?,
+            payment_method = ?, shipping_cost = ?, shipping_date = ?, reference = ?
+        WHERE purchase_id = ?
+      delete_purchase: "DELETE FROM Purchases WHERE purchase_id = ?"
+      add_product_purchase: |
+        INSERT INTO Product_Purchases (purchase_id, product_id, quantity, unit_price)
+        VALUES (?, ?, ?, ?)
+      delete_product_purchases: "DELETE FROM Product_Purchases WHERE purchase_id = ?"

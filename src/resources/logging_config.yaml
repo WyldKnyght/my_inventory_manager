@@ -1,3 +1,0 @@
-logging:
-  level: DEBUG
-  ring_buffer_capacity: 100

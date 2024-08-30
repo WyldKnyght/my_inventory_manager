@@ -1,6 +1,7 @@
 m:\dev_env\my_inventory_manager
 ├── .env
 ├── .env_temp
+├── .eslintrc.json
 ├── .gitignore
 ├── .pylintrc
 ├── LICENSE
@@ -14,65 +15,79 @@ m:\dev_env\my_inventory_manager
 ├── requirements.txt
 ├── src
 │   ├── __init__.py
+│   ├── configs
+│   │   ├── database_config.py
+│   │   ├── logging_config.yaml
+│   │   ├── path_manager.py
+│   │   ├── table_mappings.json
+│   │   └── ui_config.py
 │   ├── controllers
 │   │   ├── __init__.py
+│   │   ├── database
+│   │   │   └── data_fetcher.py
 │   │   ├── database_controller.py
 │   │   ├── inventory_controller.py
+│   │   ├── purchases
+│   │   │   ├── __init__.py
+│   │   │   ├── queries.py
+│   │   │   ├── transactions.py
+│   │   │   └── validations.py
 │   │   ├── purchases_controller.py
 │   │   ├── sales_controller.py
 │   │   └── settings_controller.py
 │   ├── main.py
 │   ├── resources
-│   │   ├── logging_config.yaml
-│   │   ├── styles.qss
-│   │   └── table_mappings.json
+│   │   └── styles.qss
 │   ├── user_interface
 │   │   ├── __init__.py
-│   │   ├── dialogs
+│   │   ├── common
 │   │   │   ├── __init__.py
-│   │   │   ├── common
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── action_buttons_dialog.py
-│   │   │   │   ├── data_table_dialog.py
-│   │   │   │   ├── error_warning_dialog.py
-│   │   │   │   ├── generic_management_dialog.py
-│   │   │   │   └── get_primary_keys.py
-│   │   │   ├── inventory
-│   │   │   │   └── __init__.py
-│   │   │   ├── purchases
-│   │   │   │   ├── __init__.py
-│   │   │   │   └── purchases_dialog.py
-│   │   │   ├── record_dialog
-│   │   │   │   ├── __init__.py
-│   │   │   │   ├── base_record_dialog.py
-│   │   │   │   └── inventory_record_dialog.py
-│   │   │   ├── reports
-│   │   │   │   ├── __init__.py
-│   │   │   │   └── reports_dialog.py
-│   │   │   ├── sales
-│   │   │   │   ├── __init__.py
-│   │   │   │   └── sales_dialog.py
-│   │   │   └── settings
-│   │   │       ├── __init__.py
-│   │   │       ├── inventory_management_dialog.py
-│   │   │       └── settings_dialog.py
-│   │   ├── framework
-│   │   │   ├── __init__.py
+│   │   │   ├── action_buttons_dialog.py
+│   │   │   ├── base_record_dialog.py
 │   │   │   ├── base_widget.py
-│   │   │   ├── home_tab.py
-│   │   │   ├── inventory_tab.py
-│   │   │   ├── purchases_tab.py
-│   │   │   ├── reports_tab.py
-│   │   │   ├── sales_tab.py
-│   │   │   └── settings_tab.py
-│   │   └── main_window.py
+│   │   │   ├── button_utils.py
+│   │   │   ├── data_table_dialog.py
+│   │   │   ├── error_warning_dialog.py
+│   │   │   ├── form_input_widgets.py
+│   │   │   ├── generic_management_dialog.py
+│   │   │   └── table_utils.py
+│   │   ├── home_tab.py
+│   │   ├── inventory
+│   │   │   ├── __init__.py
+│   │   │   └── inventory_record_dialog.py
+│   │   ├── inventory_tab.py
+│   │   ├── main_window.py
+│   │   ├── purchases
+│   │   │   ├── __init__.py
+│   │   │   ├── dialogs
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── purchase_order_additional_info.py
+│   │   │   │   ├── purchase_order_dialog.py
+│   │   │   │   ├── purchase_order_info_section.py
+│   │   │   │   ├── purchase_order_items_section.py
+│   │   │   │   ├── purchase_order_totals_section.py
+│   │   │   │   └── purchases_management_dialog.py
+│   │   │   ├── purchases_actions.py
+│   │   │   └── purchases_table.py
+│   │   ├── purchases_tab.py
+│   │   ├── reports
+│   │   │   ├── __init__.py
+│   │   │   └── reports_dialog.py
+│   │   ├── reports_tab.py
+│   │   ├── sales
+│   │   │   ├── __init__.py
+│   │   │   └── sales_dialog.py
+│   │   ├── sales_tab.py
+│   │   ├── settings
+│   │   │   ├── __init__.py
+│   │   │   ├── inventory_management_dialog.py
+│   │   │   └── settings_dialog.py
+│   │   └── settings_tab.py
 │   └── utils
 │       ├── __init__.py
 │       ├── create_db_tables.py
-│       ├── database_helpers.py
-│       ├── field_helpers.py
-│       ├── logging_colors.py
-│       └── ui_helpers.py
+│       ├── custom_logging.py
+│       └── error_handler.py
 └── tests
     ├── add_item_dialog.py
     ├── add_product_dialog.py
@@ -118,4 +133,4 @@ m:\dev_env\my_inventory_manager
     ├── temp_main.py
     └── validation.py
 
-Script last modified: 2024-08-21 17:27:00
+Script last modified: 2024-08-30 18:09:22
