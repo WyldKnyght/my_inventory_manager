@@ -1,7 +1,7 @@
 # src/controllers/database/data_fetcher.py
 from controllers.database_controller import DatabaseController
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.config_manager import config_manager
 
 class DataFetcher:
@@ -10,7 +10,7 @@ class DataFetcher:
     def __init__(self):
         self.db_controller = DatabaseController()
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def fetch_foreign_key_data(self, table_name: str, key_column: str, value_column: str) -> list:
         """
         Fetch data for foreign key fields.
@@ -28,7 +28,7 @@ class DataFetcher:
         logger.debug(f"Fetched {len(result)} rows from {table_name}")
         return result
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def _get_foreign_key_query(self, table_name: str, key_column: str, value_column: str) -> str:
         """
         Get the query for fetching foreign key data.
@@ -47,7 +47,7 @@ class DataFetcher:
         logger.debug(f"Generated foreign key query: {query}")
         return query
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def fetch_table_data(self, table_name: str, columns: list = None, 
                             where_clause: str = None, order_by: str = None) -> list:
         """
@@ -67,7 +67,7 @@ class DataFetcher:
         logger.debug(f"Fetched {len(result)} rows from {table_name}")
         return result
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def _get_table_data_query(self, table_name: str, columns: list = None, 
                                 where_clause: str = None, order_by: str = None) -> str:
         """

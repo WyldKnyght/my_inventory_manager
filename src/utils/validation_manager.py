@@ -2,7 +2,7 @@
 
 from typing import Dict, Any, List
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.config_manager import config_manager
 
 class ValidationManager:
@@ -11,7 +11,7 @@ class ValidationManager:
         self.errors = []
         logger.info("Initialized ValidationManager")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def validate(self, data: Dict[str, Any], rule_set: str) -> bool:
         """
         Validate data against a specific rule set.
@@ -95,7 +95,7 @@ class ValidationManager:
 validation_manager = ValidationManager()
 
 # Helper function to easily validate data
-@ErrorHandler.handle_errors()
+@ErrorManager.handle_errors()
 def validate_data(data: Dict[str, Any], rule_set: str) -> bool:
     """
     Validate data using the ValidationManager.

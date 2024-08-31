@@ -6,7 +6,7 @@ from user_interface.common.button_utils import add_action_buttons
 from user_interface.common.table_utils import configure_table_headers, populate_table_with_data
 from user_interface.common.error_warning_dialog import show_error_message, show_warning_message
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import UIConfig, TableSettings, Titles, Buttons, MessageBoxTitles
 
 class InventoryManagementDialog(QtWidgets.QDialog):
@@ -18,7 +18,7 @@ class InventoryManagementDialog(QtWidgets.QDialog):
         self.setup_ui()
         logger.info("Initialized InventoryManagementDialog")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def setup_ui(self):
         """Set up the UI components."""
         layout = QtWidgets.QVBoxLayout(self)
@@ -35,7 +35,7 @@ class InventoryManagementDialog(QtWidgets.QDialog):
         self.load_catalog()
         logger.debug("Set up UI for InventoryManagementDialog")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def create_data_table(self) -> QtWidgets.QTableWidget:
         """Create and configure the data table."""
         table = QtWidgets.QTableWidget(self)
@@ -43,7 +43,7 @@ class InventoryManagementDialog(QtWidgets.QDialog):
         logger.debug("Created data table for inventory management")
         return table
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def load_catalog(self):
         """Load catalog data and display it in the table."""
         try:
@@ -56,7 +56,7 @@ class InventoryManagementDialog(QtWidgets.QDialog):
             logger.error(error_msg)
             show_error_message(self, MessageBoxTitles.ERROR, error_msg)
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def add_entry(self):
         """Add a new catalog entry."""
         column_headers, _ = self.inventory_controller.get_data_by_table("Catalog")
@@ -69,7 +69,7 @@ class InventoryManagementDialog(QtWidgets.QDialog):
             self.load_catalog()
             logger.info("Added new catalog entry")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def edit_entry(self):
         """Edit the selected catalog entry."""
         selected_row = self.data_table.currentRow()
@@ -87,7 +87,7 @@ class InventoryManagementDialog(QtWidgets.QDialog):
             self.load_catalog()
             logger.info(f"Edited catalog entry with ID: {item_id}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def delete_entry(self):
         """Delete the selected catalog entry."""
         selected_row = self.data_table.currentRow()
@@ -108,7 +108,7 @@ class InventoryManagementDialog(QtWidgets.QDialog):
             self.load_catalog()
             logger.info(f"Deleted catalog entry with ID: {item_id}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def get_selected_record_data(self, row):
         """Retrieve data from the selected row."""
         data = {}

@@ -1,7 +1,7 @@
 # src/user_interface/purchases/dialogs/purchase_order_totals_section.py
 from PyQt6 import QtWidgets
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import Titles, FormFieldSizes
 
 class PurchaseOrderTotalsSection(QtWidgets.QGroupBox):
@@ -10,7 +10,7 @@ class PurchaseOrderTotalsSection(QtWidgets.QGroupBox):
         self.setup_ui()
         logger.info("Initialized PurchaseOrderTotalsSection")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def setup_ui(self):
         """Set up the UI components for the purchase order totals section."""
         layout = QtWidgets.QFormLayout(self)
@@ -38,7 +38,7 @@ class PurchaseOrderTotalsSection(QtWidgets.QGroupBox):
         logger.debug("Set up UI for PurchaseOrderTotalsSection")
 
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def populate_fields(self, data: dict):
         """Populate fields with existing record data."""
         self.subtotal_edit.setText(str(data.get('subtotal', '')))
@@ -49,7 +49,7 @@ class PurchaseOrderTotalsSection(QtWidgets.QGroupBox):
         self.custom_fees_edit.setText(str(data.get('custom_fees', '')))
         logger.debug("Populated fields in PurchaseOrderTotalsSection")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def get_data(self) -> dict:
         """Retrieve data from input fields."""
         return {
@@ -61,7 +61,7 @@ class PurchaseOrderTotalsSection(QtWidgets.QGroupBox):
             'custom_fees': self.custom_fees_edit.text(),
         }
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def calculate_total(self):
         """TODO: Update Place holder calculation."""
         subtotal = self.subtotal_edit.text()

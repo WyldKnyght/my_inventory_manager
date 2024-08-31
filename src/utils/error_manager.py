@@ -1,5 +1,5 @@
-# src/utils/error_handler.py
-
+# src/utils/error_manager.py
+from PyQt6 import QtWidgets
 from typing import Any, Callable, TypeVar, Dict, Tuple, Optional, Type
 from functools import wraps
 import traceback
@@ -7,7 +7,7 @@ from utils.custom_logging import logger
 
 T = TypeVar('T')
 
-class ErrorHandler:
+class ErrorManager:
     @staticmethod
     def handle_errors(
         default_value: Any = None,
@@ -20,7 +20,7 @@ class ErrorHandler:
         def log_and_handle_exception(func_name: str, e: Exception, log_exceptions: Optional[Tuple[Type[Exception], ...]], log_level: str):
             stack_trace = traceback.format_exc()
             if log_exceptions is None or isinstance(e, log_exceptions):
-                ErrorHandler.log_error(func_name, str(e), stack_trace, log_level)
+                ErrorManager.log_error(func_name, str(e), stack_trace, log_level)
             return stack_trace
 
         def wrapper(func: Callable[..., T]) -> Callable[..., Dict[str, Any]]:
@@ -58,3 +58,12 @@ class ErrorHandler:
             error_details += f"\nStack Trace:\n{stack_trace}"
         
         logger.log(level, error_details)
+    
+    @staticmethod
+    def handle_critical_error(error: Exception, parent: QtWidgets.QWidget = None) -> None:
+        error_message = f"A critical error occurred: {str(error)}"
+        logger.critical(error_message)
+        QtWidgets.QMessageBox.critical(parent, "Critical Error", "Failed to set up the application. Please restart.")
+        # Optionally, you can close the application here
+        # if parent:
+        #     parent.close()

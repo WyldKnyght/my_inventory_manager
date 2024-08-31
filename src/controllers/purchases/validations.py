@@ -2,7 +2,7 @@
 
 from typing import Dict, Any
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.config_manager import config_manager
 
 class PurchaseValidations:
@@ -10,7 +10,7 @@ class PurchaseValidations:
         self.validation_rules = config_manager.get('validations.purchases', {})
         logger.info("Initialized PurchaseValidations")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def validate_purchase_data(self, purchase_data: Dict[str, Any]) -> bool:
         """Validate purchase data before adding or updating."""
         required_fields = self.validation_rules.get('required_fields', [
@@ -60,7 +60,7 @@ class PurchaseValidations:
                     return False
         return True
 
-@ErrorHandler.handle_errors()
+@ErrorManager.handle_errors()
 def validate_purchase_data(purchase_data: Dict[str, Any]) -> bool:
     """Validate purchase data before adding or updating."""
     validator = PurchaseValidations()

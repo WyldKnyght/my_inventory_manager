@@ -1,7 +1,7 @@
 # src/user_interface/settings/settings_dialog.py
 from PyQt6 import QtWidgets
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import Titles, Placeholders, UIConfig
 
 class SettingsDialog(QtWidgets.QDialog):
@@ -14,7 +14,7 @@ class SettingsDialog(QtWidgets.QDialog):
         self.setup_ui()
         logger.info("Initialized SettingsDialog")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def setup_ui(self):
         """Set up the UI components for the settings dialog."""
         layout = QtWidgets.QVBoxLayout(self)
@@ -24,17 +24,17 @@ class SettingsDialog(QtWidgets.QDialog):
 
 '''
     # Placeholder for future methods
-    # @ErrorHandler.handle_errors()
+    # @ErrorManager.handle_errors()
     # def save_settings(self):
     #     """Save the configured settings."""
     #     pass
 
-    # @ErrorHandler.handle_errors()
+    # @ErrorManager.handle_errors()
     # def load_settings(self):
     #     """Load the current settings."""
     #     pass
 
-    # @ErrorHandler.handle_errors()
+    # @ErrorManager.handle_errors()
     # def apply_settings(self):
     #     """Apply the current settings to the application."""
     #     pass

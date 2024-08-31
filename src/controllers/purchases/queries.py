@@ -3,7 +3,7 @@
 from typing import List, Dict, Any
 from ..database_controller import DatabaseController
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.config_manager import config_manager
 
 class PurchasesQueries:
@@ -12,7 +12,7 @@ class PurchasesQueries:
         self.queries = config_manager.get('database.queries.purchases', {})
         logger.info("Initialized PurchasesQueries")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def get_all_purchases(self) -> List[Dict[str, Any]]:
         """Retrieve all purchases from the database."""
         query = self.queries.get('get_all_purchases', """
@@ -25,7 +25,7 @@ class PurchasesQueries:
         logger.debug(f"Retrieved {len(result)} purchases")
         return result
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def add_purchase(self, purchase_data: Dict[str, Any]) -> int:
         """Add a new purchase to the database."""
         purchase_query = self.queries.get('add_purchase', """
@@ -49,7 +49,7 @@ class PurchasesQueries:
         logger.info(f"Added new purchase with ID: {purchase_id}")
         return purchase_id
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def add_product_purchase(self, purchase_id: int, item_data: Dict[str, Any]) -> None:
         """Add a product purchase to the database."""
         query = self.queries.get('add_product_purchase', "INSERT INTO Product_Purchases (purchase_id, product_id, quantity) VALUES (?, ?, ?)")
@@ -57,7 +57,7 @@ class PurchasesQueries:
         self.db_controller.execute_query(query, params)
         logger.debug(f"Added product purchase for purchase ID: {purchase_id}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def update_purchase(self, purchase_data: Dict[str, Any]) -> None:
         """Update an existing purchase in the database."""
         purchase_query = self.queries.get('update_purchase', """
@@ -82,7 +82,7 @@ class PurchasesQueries:
         
         logger.info(f"Updated purchase with ID: {purchase_data['purchase_id']}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def delete_purchase(self, purchase_id: int) -> None:
         """Delete a purchase and its product purchases from the database."""
         self.delete_product_purchases(purchase_id)
@@ -90,14 +90,14 @@ class PurchasesQueries:
         self.db_controller.execute_query(query, (purchase_id,))
         logger.info(f"Deleted purchase with ID: {purchase_id}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def delete_product_purchases(self, purchase_id: int) -> None:
         """Delete all product purchases associated with a purchase."""
         query = self.queries.get('delete_product_purchases', "DELETE FROM Product_Purchases WHERE purchase_id = ?")
         self.db_controller.execute_query(query, (purchase_id,))
         logger.debug(f"Deleted product purchases for purchase ID: {purchase_id}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def get_purchase_by_id(self, purchase_id: int) -> Dict[str, Any]:
         """Retrieve a specific purchase and its product purchases by purchase ID."""
         purchase_query = self.queries.get('get_purchase_by_id', """

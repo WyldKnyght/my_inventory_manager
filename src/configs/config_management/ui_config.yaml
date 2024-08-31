@@ -1,0 +1,73 @@
+# src/configs/config_management/ui_config.yaml
+
+window_sizes:
+  main: [1200, 800]
+  dialog: [1000, 800]
+font_size: 12
+button_height: 30
+padding: 10
+titles:
+  main_window: "Inventory Management System"
+  settings_dialog: "General Settings"
+  purchase_order_dialog: "Purchase Order"
+  inventory_dialog: "Inventory Management"
+  edit_record: "Edit Record"
+  delete_record: "Delete Record"
+  confirm_deletion: "Confirm Deletion"
+tabs:
+  home: "Home"
+  inventory: "Inventory"
+  purchases: "Purchases"
+  reports: "Reports"
+  sales: "Sales"
+  settings: "Settings"
+subtabs:
+  purchases: "Purchases"
+  expenses: "Expenses"
+group_titles:
+  search: "Search"
+  catalog: "Inventory Catalog"
+  purchases: "Purchases"
+  actions: "Actions"
+  data_management: "Data Management"
+  app_settings: "Application Settings"
+placeholders:
+  settings: "General settings configuration goes here."
+  search: "Search..."
+  expenses: "Expenses tab content will be implemented here."
+  app_settings: "Application settings will be added here."
+buttons:
+  add: "Add"
+  edit: "Edit"
+  delete: "Delete"
+  save: "Save"
+  cancel: "Cancel"
+action_button_labels:
+  add: "Add"
+  edit: "Edit"
+  delete: "Delete"
+  exit: "Exit"
+dialog_button_labels:
+  save: "Save"
+  cancel: "Cancel"
+button_config:
+  - ["Manage Categories", "Categories"]
+  - ["Manage Catalog", "Catalog"]
+  - ["Manage Unit Types", "UnitTypes"]
+message_titles:
+  error: "Error"
+  warning: "Warning"
+  info: "Information"
+  confirm: "Confirm"
+table_headers:
+  purchase_order_items: ["Product", "Quantity", "Unit Price", "Total", ""]
+  inventory: ["ID", "Item Number", "Name", "Description", "Quantity", "Price"]
+field_widths:
+  short: 100
+  medium: 200
+  long: 300
+units:
+  currencies: ["CAD", "USD"]
+  purchase_statuses: ["Pending", "Shipped", "Delivered"]
+  dimension_units: ["cm", "in"]
+  weight_units: ["kg", "lb"]

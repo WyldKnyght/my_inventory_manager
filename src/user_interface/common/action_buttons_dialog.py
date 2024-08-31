@@ -1,10 +1,10 @@
 # src/user_interface/common/action_buttons_dialog.py
 from user_interface.common.button_utils import add_action_buttons
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import ACTION_BUTTON_LABELS
 
-@ErrorHandler.handle_errors()
+@ErrorManager.handle_errors()
 def create_action_buttons(dialog):
     """Create action buttons and return their layout."""
     actions = [

@@ -2,7 +2,7 @@
 from PyQt6 import QtWidgets, QtCore
 from controllers.inventory_controller import InventoryController
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import Titles, FormFieldSizes, Placeholders
 
 class PurchaseOrderInfoSection(QtWidgets.QGroupBox):
@@ -12,7 +12,7 @@ class PurchaseOrderInfoSection(QtWidgets.QGroupBox):
         self.setup_ui()
         logger.info("Initialized PurchaseOrderInfoSection")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def setup_ui(self):
         """Set up the UI components for the purchase order info section."""
         layout = QtWidgets.QFormLayout(self)
@@ -37,14 +37,14 @@ class PurchaseOrderInfoSection(QtWidgets.QGroupBox):
         self.populate_vendor_combo()
         logger.debug("Set up UI for PurchaseOrderInfoSection")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def populate_vendor_combo(self):
         """Populate the vendor combo box with data from the inventory controller."""
         vendors = self.inventory_controller.get_vendors()
         self.vendor_combo.addItems(vendors)
         logger.debug(f"Populated vendor combo box with {len(vendors)} vendors")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def populate_fields(self, data: dict):
         """Populate fields with existing record data."""
         self.vendor_combo.setCurrentText(data.get('vendor', ''))
@@ -53,7 +53,7 @@ class PurchaseOrderInfoSection(QtWidgets.QGroupBox):
         self.po_number_edit.setText(data.get('po_number', ''))
         logger.debug("Populated fields in PurchaseOrderInfoSection")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def get_data(self) -> dict:
         """Retrieve data from input fields."""
         return {

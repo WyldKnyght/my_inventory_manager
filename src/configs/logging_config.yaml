@@ -1,4 +1,0 @@
-# src/configs/logging_config.yaml
-logging:
-  level: DEBUG
-  ring_buffer_capacity: 100

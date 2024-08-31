@@ -1,7 +1,7 @@
 # src/user_interface/common/base_record_dialog.py
 from PyQt6 import QtWidgets
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import DIALOG_BUTTON_LABELS
 
 class BaseRecordDialog(QtWidgets.QDialog):
@@ -13,7 +13,7 @@ class BaseRecordDialog(QtWidgets.QDialog):
         self.setup_ui()
         logger.info(f"Initialized BaseRecordDialog: {title}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def setup_ui(self):
         """Set up the dialog UI."""
         layout = QtWidgets.QFormLayout(self)
@@ -25,7 +25,7 @@ class BaseRecordDialog(QtWidgets.QDialog):
         """Add input fields for each column."""
         raise NotImplementedError("Subclasses should implement this method.")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def add_buttons(self, layout):
         """Add Save and Cancel buttons."""
         button_layout = QtWidgets.QHBoxLayout()
@@ -38,7 +38,7 @@ class BaseRecordDialog(QtWidgets.QDialog):
         layout.addRow(button_layout)
         logger.debug(f"Added {DIALOG_BUTTON_LABELS['save']} and {DIALOG_BUTTON_LABELS['cancel']} buttons to BaseRecordDialog")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def populate_fields(self):
         """Populate fields with existing record data."""
         for key, value in self.record_data.items():
@@ -53,7 +53,7 @@ class BaseRecordDialog(QtWidgets.QDialog):
                     widget.setChecked(value.lower() == 'yes')
         logger.debug(f"Populated fields with record data: {list(self.record_data.keys())}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def get_data(self):
         """Retrieve data from input fields."""
         data = {}

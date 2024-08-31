@@ -3,7 +3,7 @@ from PyQt6 import QtWidgets, QtCore
 from controllers.inventory_controller import InventoryController
 from configs.database_config import get_primary_key
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from .data_table_dialog import create_data_table, load_data
 from .action_buttons_dialog import create_action_buttons
 from .error_warning_dialog import show_error_message, show_warning_message
@@ -20,7 +20,7 @@ class GenericManagementDialog(QtWidgets.QDialog):
         self.setup_ui()
         logger.info(f"Initialized GenericManagementDialog for {table_name}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def setup_ui(self):
         """Set up the UI components."""
         layout = QtWidgets.QVBoxLayout(self)
@@ -33,7 +33,7 @@ class GenericManagementDialog(QtWidgets.QDialog):
         load_data(self.table_name, self.data_table, self.inventory_controller)
         logger.debug("GenericManagementDialog UI setup completed")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def add_entry(self):
         """Add a new entry."""
         column_headers = [self.data_table.horizontalHeaderItem(col).text() for col in range(1, self.data_table.columnCount())]
@@ -44,7 +44,7 @@ class GenericManagementDialog(QtWidgets.QDialog):
                 load_data(self.table_name, self.data_table, self.inventory_controller)
                 logger.info(f"New entry added to {self.table_name}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def edit_entry(self):
         """Edit the selected entries."""
         selected_items = self.get_selected_items()
@@ -71,7 +71,7 @@ class GenericManagementDialog(QtWidgets.QDialog):
                 load_data(self.table_name, self.data_table, self.inventory_controller)
                 logger.info(f"Entry updated in {self.table_name}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def delete_entry(self):
         """Delete the selected entries."""
         selected_items = self.get_selected_items()
@@ -94,7 +94,7 @@ class GenericManagementDialog(QtWidgets.QDialog):
             load_data(self.table_name, self.data_table, self.inventory_controller)
             logger.info(f"{len(selected_items)} entries deleted from {self.table_name}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def get_selected_items(self):
         """Get the selected items based on checkboxes."""
         selected_items = []

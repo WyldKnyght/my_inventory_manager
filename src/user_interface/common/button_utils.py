@@ -1,10 +1,10 @@
 # src/user_interface/common/button_utils.py
 from PyQt6.QtWidgets import QHBoxLayout, QPushButton
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import BUTTON_STYLE
 
-@ErrorHandler.handle_errors()
+@ErrorManager.handle_errors()
 def create_action_button(parent, text, action):
     """Create a button and connect it to an action."""
     button = QPushButton(text, parent)
@@ -13,7 +13,7 @@ def create_action_button(parent, text, action):
     logger.debug(f"Created action button: {text}")
     return button
 
-@ErrorHandler.handle_errors()
+@ErrorManager.handle_errors()
 def add_action_buttons(parent, actions):
     """Add action buttons to a layout."""
     layout = QHBoxLayout()

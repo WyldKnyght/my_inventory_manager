@@ -1,0 +1,62 @@
+# src/configs/config_management/database_config.yaml
+path: "{{DATABASE_DIR}}/inventory.db"
+
+paths:
+  schema: "{{DATABASE_DIR}}/schema.sql"
+
+tables:
+  Categories:
+    primary_key: category_id
+    fields: [category_id, category_name]
+  Vendors:
+    primary_key: vendor_id
+    fields: [vendor_id, vendor_name, contact_info]
+  Customers:
+    primary_key: customer_id
+    fields: [customer_id, customer_name, contact_info]
+  Accounts:
+    primary_key: account_id
+    fields: [account_id, account_name]
+  Settings:
+    primary_key: setting_id
+    fields: [setting_id, setting_name, setting_value]
+  UnitTypes:
+    primary_key: unit_type_id
+    fields: [unit_type_id, unit_type_name]
+  Catalog:
+    primary_key: item_id
+    fields: [item_id, item_name, category_id, description, quantity, unit_price]
+  Sales:
+    primary_key: sales_id
+    fields: [sales_id, customer_id, sale_date, total_amount]
+  Product_Sales:
+    primary_key: product_sales_id
+    fields: [product_sales_id, sales_id, product_id, quantity, unit_price]
+  Purchases:
+    primary_key: purchase_id
+    fields: [purchase_id, vendor_id, purchase_date, total_amount]
+  Product_Purchases:
+    primary_key: product_purchase_id
+    fields: [product_purchase_id, purchase_id, product_id, quantity, unit_price]
+  Expenses:
+    primary_key: expense_id
+    fields: [expense_id, expense_date, expense_amount, expense_category]
+
+queries:
+  purchases:
+    add_purchase: |
+      INSERT INTO Purchases (vendor_id, vendor_order_number, purchase_order_number, purchase_date, purchase_amount,
+                              taxes, discount, customs_fees, currency, purchase_status, payment_method, shipping_cost,
+                              shipping_date, reference)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    update_purchase: |
+      UPDATE Purchases SET
+          vendor_id = ?, vendor_order_number = ?, purchase_date = ?, purchase_amount = ?,
+          taxes = ?, discount = ?, customs_fees = ?, currency = ?, purchase_status = ?,
+          payment_method = ?, shipping_cost = ?, shipping_date = ?, reference = ?
+      WHERE purchase_id = ?
+    delete_purchase: "DELETE FROM Purchases WHERE purchase_id = ?"
+    add_product_purchase: |
+      INSERT INTO Product_Purchases (purchase_id, product_id, quantity, unit_price)
+      VALUES (?, ?, ?, ?)
+    delete_product_purchases: "DELETE FROM Product_Purchases WHERE purchase_id = ?"

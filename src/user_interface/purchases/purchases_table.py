@@ -3,7 +3,7 @@ from PyQt6 import QtWidgets
 from user_interface.common.table_utils import configure_table_headers, populate_table_with_data
 from user_interface.common.error_warning_dialog import show_error_message
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import TableSettings, MessageBoxTitles
 
 class PurchasesTable(QtWidgets.QTableWidget):
@@ -15,7 +15,7 @@ class PurchasesTable(QtWidgets.QTableWidget):
         self.setSizePolicy(*TableSettings.POLICY)
         logger.info("Initialized PurchasesTable")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def load_purchases_data(self, purchases_controller, status_bar):
         status_bar.showMessage("Loading purchases data...")
         try:
@@ -38,7 +38,7 @@ class PurchasesTable(QtWidgets.QTableWidget):
             status_bar.showMessage("Failed to load purchases data", 3000)
             logger.error(error_msg)
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def filter_purchases(self, search_text):
         search_text = search_text.lower()
         for row in range(self.rowCount()):
@@ -51,7 +51,7 @@ class PurchasesTable(QtWidgets.QTableWidget):
             self.setRowHidden(row, not match)
         logger.debug(f"Filtered purchases with search text: {search_text}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def get_selected_purchase_id(self):
         selected_row = self.currentRow()
         purchase_id = None if selected_row == -1 else self.item(selected_row, 0).text()

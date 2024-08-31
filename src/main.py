@@ -1,12 +1,12 @@
 # src/main.py
 import sys
 from PyQt6 import QtWidgets
-from user_interface.main_window import MainWindow
+from user_interface.main_window_components import MainWindow
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.config_manager import config_manager
 
-@ErrorHandler.handle_errors()
+@ErrorManager.handle_errors()
 def initialize_app():
     """Initialize the application and apply styles."""
     app = QtWidgets.QApplication(sys.argv)
@@ -20,7 +20,7 @@ def initialize_app():
     logger.info("Application initialized and styles applied")
     return app
 
-@ErrorHandler.handle_errors()
+@ErrorManager.handle_errors()
 def run_app():
     """Initialize and run the main application."""
     app = initialize_app()
@@ -32,4 +32,8 @@ def run_app():
     sys.exit(app.exec())
 
 if __name__ == "__main__":
-    run_app()
+    try:
+        run_app()
+    except Exception as e:
+        logger.critical(f"Unhandled exception: {str(e)}")
+        sys.exit(1)

@@ -1,51 +1,46 @@
 /* src/resources/styles.qss */
+
+/* Variables */
+@BACKGROUND_COLOR: {{BACKGROUND_COLOR}};
+@BACKGROUND_COLOR_LIGHT: {{BACKGROUND_COLOR_LIGHT}};
+@PRIMARY_COLOR: {{PRIMARY_COLOR}};
+@SECONDARY_COLOR: {{SECONDARY_COLOR}};
+@TEXT_COLOR: {{TEXT_COLOR}};
+@FONT_SIZE: {{FONT_SIZE}}px;
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* Basic Widgets */
 QWidget {
-    background-color: {{BACKGROUND_COLOR}};
+    background-color: @BACKGROUND_COLOR;
     font-family: Arial;
-    font-size: {{FONT_SIZE}}px;
-}
-
-QGroupBox {
-    font-weight: bold;
-    border: 2px solid {{PRIMARY_COLOR}};
-    border-radius: 5px;
-    margin-top: 10px;
-    padding-top: 10px;
-}
-
-QGroupBox::title {
-    subcontrol-origin: margin;
-    subcontrol-position: top left;
-    padding: 0 3px;
-    color: {{PRIMARY_COLOR}};
+    font-size: @FONT_SIZE;
 }
 
 QLabel {
-    color: {{TEXT_COLOR}};
-}
-
-QComboBox {
-    background-color: {{SECONDARY_COLOR}};
-    border: 1px solid {{PRIMARY_COLOR}};
-    border-radius: 3px;
-    padding: 3px;
-    color: {{TEXT_COLOR}};
+    color: @TEXT_COLOR;
 }
 
 QPushButton {
-    background-color: {{PRIMARY_COLOR}};
+    background-color: @PRIMARY_COLOR;
     color: white;
     border-radius: 5px;
     padding: 5px;
 }
 
 QPushButton:hover {
-    background-color: {{SECONDARY_COLOR}};
+    background-color: @SECONDARY_COLOR;
 }
 
+/* Input Widgets */
 QLineEdit {
     background-color: white;
-    border: 1px solid {{PRIMARY_COLOR}};
+    border: 1px solid @PRIMARY_COLOR;
     padding: 5px;
     border-radius: 3px;
 }
@@ -55,14 +50,56 @@ QLineEdit[placeholderText] {
     color: #6E6E6E;
 }
 
+QComboBox {
+    background-color: @SECONDARY_COLOR;
+    border: 1px solid @PRIMARY_COLOR;
+    border-radius: 3px;
+    padding: 3px;
+    color: @TEXT_COLOR;
+}
+
+QCheckBox, QRadioButton {
+    color: @TEXT_COLOR;
+}
+
+QCheckBox::indicator, QRadioButton::indicator {
+    width: 13px;
+    height: 13px;
+    border: 1px solid @PRIMARY_COLOR;
+}
+
+QCheckBox::indicator:checked, QRadioButton::indicator:checked {
+    background-color: @PRIMARY_COLOR;
+}
+
+QRadioButton::indicator {
+    border-radius: 6px;
+}
+
+/* Container Widgets */
+QGroupBox {
+    font-weight: bold;
+    border: 2px solid @PRIMARY_COLOR;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 3px;
+    color: @PRIMARY_COLOR;
+}
+
 QTabWidget::pane {
-    border: 2px solid {{PRIMARY_COLOR}};
+    border: 2px solid @PRIMARY_COLOR;
     border-top: none;
 }
 
 QTabBar::tab {
-    background: {{BACKGROUND_COLOR}};
-    border: 2px solid {{PRIMARY_COLOR}};
+    background: @BACKGROUND_COLOR;
+    border: 2px solid @PRIMARY_COLOR;
     border-bottom: none;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -72,18 +109,18 @@ QTabBar::tab {
 }
 
 QTabBar::tab:selected {
-    background: {{PRIMARY_COLOR}};
+    background: @PRIMARY_COLOR;
     color: white;
 }
 
 QTabBar::tab:hover {
-    background: {{SECONDARY_COLOR}};
+    background: @SECONDARY_COLOR;
 }
 
 QTableWidget {
     background-color: #FFFFFF;
     alternate-background-color: #F0F0F0;
-    selection-background-color: {{SECONDARY_COLOR}};
+    selection-background-color: @SECONDARY_COLOR;
 }
 
 QTableWidget::item {
@@ -91,141 +128,94 @@ QTableWidget::item {
 }
 
 QHeaderView::section {
-    background-color: {{PRIMARY_COLOR}};
+    background-color: @PRIMARY_COLOR;
     color: white;
     padding: 5px;
-    border: 1px solid {{TEXT_COLOR}};
+    border: 1px solid @TEXT_COLOR;
+}
+
+/* Menu and Status Bar */
+QMenuBar, QMenu {
+    background-color: @BACKGROUND_COLOR;
+    color: @TEXT_COLOR;
+}
+
+QMenuBar::item:selected, QMenu::item:selected {
+    background-color: @SECONDARY_COLOR;
 }
 
 QStatusBar {
-    background-color: {{SECONDARY_COLOR}};
-    color: {{TEXT_COLOR}};
+    background-color: @SECONDARY_COLOR;
+    color: @TEXT_COLOR;
 }
 
-QGroupBox[title="Search"], QGroupBox[title="Actions"] {
-    background-color: {{BACKGROUND_COLOR_LIGHT}};
-}
-
-QLabel[placeholder="true"] {
-    color: #6E6E6E;
-    font-style: italic;
-}
-
-/* Scrollbar Styles */
+/* Scrollbars */
 QScrollBar:vertical {
-    border: 1px solid {{PRIMARY_COLOR}};
-    background: {{BACKGROUND_COLOR}};
+    border: 1px solid @PRIMARY_COLOR;
+    background: @BACKGROUND_COLOR;
     width: 15px;
     margin: 22px 0 22px 0;
 }
 
 QScrollBar::handle:vertical {
-    background: {{PRIMARY_COLOR}};
+    background: @PRIMARY_COLOR;
     min-height: 20px;
 }
 
-QScrollBar::add-line:vertical {
-    border: 1px solid {{PRIMARY_COLOR}};
-    background: {{SECONDARY_COLOR}};
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    border: 1px solid @PRIMARY_COLOR;
+    background: @SECONDARY_COLOR;
     height: 20px;
-    subcontrol-position: bottom;
     subcontrol-origin: margin;
 }
 
+QScrollBar::add-line:vertical {
+    subcontrol-position: bottom;
+}
+
 QScrollBar::sub-line:vertical {
-    border: 1px solid {{PRIMARY_COLOR}};
-    background: {{SECONDARY_COLOR}};
-    height: 20px;
     subcontrol-position: top;
-    subcontrol-origin: margin;
 }
 
 QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
     width: 3px;
     height: 3px;
-    background: {{TEXT_COLOR}};
+    background: @TEXT_COLOR;
 }
 
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     background: none;
 }
 
-/* New styles */
-
-QMenuBar {
-    background-color: {{BACKGROUND_COLOR}};
-    color: {{TEXT_COLOR}};
-}
-
-QMenuBar::item:selected {
-    background-color: {{SECONDARY_COLOR}};
-}
-
-QMenu {
-    background-color: {{BACKGROUND_COLOR}};
-    color: {{TEXT_COLOR}};
-}
-
-QMenu::item:selected {
-    background-color: {{SECONDARY_COLOR}};
-}
-
-QCheckBox {
-    color: {{TEXT_COLOR}};
-}
-
-QCheckBox::indicator {
-    width: 13px;
-    height: 13px;
-}
-
-QCheckBox::indicator:unchecked {
-    border: 1px solid {{PRIMARY_COLOR}};
-}
-
-QCheckBox::indicator:checked {
-    background-color: {{PRIMARY_COLOR}};
-    border: 1px solid {{PRIMARY_COLOR}};
-}
-
-QRadioButton {
-    color: {{TEXT_COLOR}};
-}
-
-QRadioButton::indicator {
-    width: 13px;
-    height: 13px;
-}
-
-QRadioButton::indicator:unchecked {
-    border: 1px solid {{PRIMARY_COLOR}};
-    border-radius: 6px;
-}
-
-QRadioButton::indicator:checked {
-    background-color: {{PRIMARY_COLOR}};
-    border: 1px solid {{PRIMARY_COLOR}};
-    border-radius: 6px;
-}
-
+/* Other Widgets */
 QProgressBar {
-    border: 1px solid {{PRIMARY_COLOR}};
+    border: 1px solid @PRIMARY_COLOR;
     border-radius: 5px;
     text-align: center;
 }
 
 QProgressBar::chunk {
-    background-color: {{PRIMARY_COLOR}};
+    background-color: @PRIMARY_COLOR;
     width: 20px;
 }
 
 QToolTip {
-    background-color: {{BACKGROUND_COLOR_LIGHT}};
-    color: {{TEXT_COLOR}};
-    border: 1px solid {{PRIMARY_COLOR}};
+    background-color: @BACKGROUND_COLOR_LIGHT;
+    color: @TEXT_COLOR;
+    border: 1px solid @PRIMARY_COLOR;
     padding: 5px;
 }
 
 QDialog {
-    background-color: {{BACKGROUND_COLOR}};
+    background-color: @BACKGROUND_COLOR;
+}
+
+/* Specific Styles */
+QGroupBox[title="Search"], QGroupBox[title="Actions"] {
+    background-color: @BACKGROUND_COLOR_LIGHT;
+}
+
+QLabel[placeholder="true"] {
+    color: #6E6E6E;
+    font-style: italic;
 }

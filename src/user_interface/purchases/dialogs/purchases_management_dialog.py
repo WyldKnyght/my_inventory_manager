@@ -4,7 +4,7 @@ from user_interface.common.generic_management_dialog import GenericManagementDia
 from .purchase_order_dialog import PurchaseOrderDialog
 from user_interface.common.error_warning_dialog import show_warning_message, show_error_message
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import Titles, MessageBoxTitles
 
 class PurchasesManagementDialog(GenericManagementDialog):
@@ -14,7 +14,7 @@ class PurchasesManagementDialog(GenericManagementDialog):
         self.load_data()
         logger.info("Initialized PurchasesManagementDialog")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def load_data(self):
         """Load and display all purchases."""
         try:
@@ -26,7 +26,7 @@ class PurchasesManagementDialog(GenericManagementDialog):
             logger.error(error_msg)
             show_error_message(self, MessageBoxTitles.ERROR, error_msg)
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def add_entry(self):
         """Add a new purchase entry."""
         dialog = PurchaseOrderDialog(parent=self)
@@ -41,7 +41,7 @@ class PurchasesManagementDialog(GenericManagementDialog):
                 logger.error(error_msg)
                 show_error_message(self, MessageBoxTitles.ERROR, error_msg)
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def edit_entry(self):
         """Edit an existing purchase entry."""
         selected_row = self.data_table.currentRow()
@@ -63,7 +63,7 @@ class PurchasesManagementDialog(GenericManagementDialog):
             logger.error(error_msg)
             show_error_message(self, MessageBoxTitles.ERROR, error_msg)
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def delete_entry(self):
         """Delete an existing purchase entry."""
         selected_row = self.data_table.currentRow()

@@ -3,7 +3,7 @@ from PyQt6 import QtWidgets
 from user_interface.purchases.dialogs.purchase_order_dialog import PurchaseOrderDialog
 from user_interface.common.error_warning_dialog import show_error_message, show_warning_message, show_info_message
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import Buttons, MessageBoxTitles, Titles
 
 class PurchasesActions:
@@ -13,7 +13,7 @@ class PurchasesActions:
         self.purchases_controller = purchases_controller
         logger.info("Initialized PurchasesActions")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def create_action_buttons(self):
         button_layout = self.parent.create_horizontal_layout()
         actions = [
@@ -29,7 +29,7 @@ class PurchasesActions:
         logger.debug("Created action buttons for purchases")
         return button_layout
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def add_purchase(self):
         dialog = PurchaseOrderDialog(parent=self.parent)
         if dialog.exec() == QtWidgets.QDialog.DialogCode.Accepted:
@@ -44,7 +44,7 @@ class PurchasesActions:
                 show_error_message(self.parent, MessageBoxTitles.ERROR, error_msg)
                 logger.error(error_msg)
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def edit_purchase(self):
         purchase_id = self.purchases_table.get_selected_purchase_id()
         if not purchase_id:
@@ -65,7 +65,7 @@ class PurchasesActions:
             show_error_message(self.parent, MessageBoxTitles.ERROR, error_msg)
             logger.error(error_msg)
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def delete_purchase(self):
         purchase_id = self.purchases_table.get_selected_purchase_id()
         if not purchase_id:
@@ -90,7 +90,7 @@ class PurchasesActions:
                 show_error_message(self.parent, MessageBoxTitles.ERROR, error_msg)
                 logger.error(error_msg)
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def refresh_table(self):
         self.purchases_table.load_purchases_data(self.purchases_controller, self.parent.status_bar)
         self.purchases_table.filter_purchases(self.parent.search_bar.text())

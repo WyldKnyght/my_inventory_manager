@@ -2,10 +2,10 @@
 from PyQt6 import QtWidgets, QtCore
 from .error_warning_dialog import show_error_message
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import TABLE_STYLE, TABLE_POLICY
 
-@ErrorHandler.handle_errors()
+@ErrorManager.handle_errors()
 def create_data_table() -> QtWidgets.QTableWidget:
     """Create and configure the data table."""
     table = QtWidgets.QTableWidget()
@@ -15,7 +15,7 @@ def create_data_table() -> QtWidgets.QTableWidget:
     logger.debug("Created data table")
     return table
 
-@ErrorHandler.handle_errors()
+@ErrorManager.handle_errors()
 def load_data(table_name, data_table, inventory_controller):
     """Load data from the specified table and display it."""
     try:
@@ -27,7 +27,7 @@ def load_data(table_name, data_table, inventory_controller):
         logger.error(error_msg)
         show_error_message(None, "Data Loading Error", error_msg)
 
-@ErrorHandler.handle_errors()
+@ErrorManager.handle_errors()
 def configure_table(data_table, column_headers, data):
     """Configure the table with checkboxes and data."""
     data_table.clear()

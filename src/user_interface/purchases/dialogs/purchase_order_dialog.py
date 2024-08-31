@@ -2,7 +2,7 @@
 from PyQt6 import QtWidgets
 from typing import Optional, Dict, Any
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from controllers.purchases_controller import PurchasesController
 from controllers.inventory_controller import InventoryController
 from user_interface.common.error_warning_dialog import show_error_message, show_info_message
@@ -23,7 +23,7 @@ class PurchaseOrderDialog(QtWidgets.QDialog):
         self.setup_ui()
         logger.info("Initialized PurchaseOrderDialog")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def setup_ui(self):
         """Set up the UI components for the purchase order dialog."""
         main_layout = QtWidgets.QVBoxLayout(self)
@@ -59,7 +59,7 @@ class PurchaseOrderDialog(QtWidgets.QDialog):
             self.populate_fields()
         logger.debug("Set up UI for PurchaseOrderDialog")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def populate_fields(self):
         """Populate fields with existing record data."""
         self.info_section.populate_fields(self.record_data)
@@ -67,7 +67,7 @@ class PurchaseOrderDialog(QtWidgets.QDialog):
         self.totals_section.populate_fields(self.record_data)
         logger.debug("Populated fields in PurchaseOrderDialog")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def get_data(self) -> Optional[Dict[str, Any]]:
         """Retrieve data from all sections of the dialog."""
         return {
@@ -78,12 +78,12 @@ class PurchaseOrderDialog(QtWidgets.QDialog):
             **self.totals_section.get_data(),
         }
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def validate_data(self, data: Dict[str, Any]) -> bool:
         """Validate the input data."""
         return all(data.get(field) for field in REQUIRED_FIELDS)
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def accept(self):
         """Handle the accept action of the dialog."""
         data = self.get_data()

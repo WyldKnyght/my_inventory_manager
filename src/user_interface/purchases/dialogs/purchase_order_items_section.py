@@ -2,7 +2,7 @@
 from PyQt6 import QtWidgets
 from controllers.inventory_controller import InventoryController
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import TableSettings, Buttons, Titles
 
 class PurchaseOrderItemsSection(QtWidgets.QGroupBox):
@@ -12,7 +12,7 @@ class PurchaseOrderItemsSection(QtWidgets.QGroupBox):
         self.setup_ui()
         logger.info("Initialized PurchaseOrderItemsSection")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def setup_ui(self):
         """Set up the UI components for the purchase order items section."""
         layout = QtWidgets.QVBoxLayout(self)
@@ -27,7 +27,7 @@ class PurchaseOrderItemsSection(QtWidgets.QGroupBox):
         layout.addWidget(add_item_button)
         logger.debug("Set up UI for PurchaseOrderItemsSection")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def add_item_row(self):
         """Add a new row to the items table."""
         row = self.items_table.rowCount()
@@ -46,13 +46,13 @@ class PurchaseOrderItemsSection(QtWidgets.QGroupBox):
         self.items_table.setCellWidget(row, 4, delete_button)
         logger.debug(f"Added new item row at index {row}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def delete_item_row(self, row):
         """Delete a row from the items table."""
         self.items_table.removeRow(row)
         logger.debug(f"Deleted item row at index {row}")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def populate_items(self, items):
         """Populate the items table with existing data."""
         self.items_table.setRowCount(0)
@@ -65,7 +65,7 @@ class PurchaseOrderItemsSection(QtWidgets.QGroupBox):
             self.items_table.item(row, 3).setText(str(item.get('total', '')))
         logger.debug(f"Populated items table with {len(items)} items")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def get_data(self) -> list:
         """Retrieve data from the items table."""
         items = []

@@ -1,6 +1,8 @@
 # src/controllers/inventory_controller.py
 
 from controllers.database_controller import DatabaseController
+from utils.error_manager import ErrorManager
+from utils.custom_logging import logger
 
 class InventoryController:
     def __init__(self):
@@ -38,3 +40,31 @@ class InventoryController:
         set_clause = ', '.join([f"{key} = ?" for key in data.keys()])
         query = f"UPDATE {table_name} SET {set_clause} WHERE {id_column} = ?"
         self.db_controller.execute_query(query, tuple(data.values()) + (item_id,))
+
+    @ErrorManager.handle_errors()
+    def get_filtered_columns(self, table_name, columns):
+        """Filter out autoincrement ID columns."""
+        id_columns = get_id_columns()
+        filtered_columns = [col for col in columns if col != id_columns.get(table_name)]
+        logger.debug(f"Filtered columns for {table_name}: {filtered_columns}")
+        return filtered_columns
+
+    @ErrorManager.handle_errors()
+    def get_category_names(self):
+        """Get all category names."""
+        # Implement the logic to fetch category names from the database
+        pass
+
+    @ErrorManager.handle_errors()
+    def get_unit_types(self):
+        """Get all unit types."""
+        # Implement the logic to fetch unit types from the database
+        pass
+
+    @ErrorManager.handle_errors()
+    def validate_inventory_input(self, table_name, field_values):
+        """Validate user input before saving."""
+        for column, value in field_values.items():
+            if not value.strip():
+                raise ValueError(f"{column} cannot be empty")
+        logger.debug("Input validation passed")

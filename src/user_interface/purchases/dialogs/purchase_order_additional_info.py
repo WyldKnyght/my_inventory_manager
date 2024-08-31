@@ -1,7 +1,7 @@
 # src/user_interface/purchases/dialogs/purchase_order_additional_info.py
 from PyQt6 import QtWidgets
 from utils.custom_logging import logger
-from utils.error_handler import ErrorHandler
+from utils.error_manager import ErrorManager
 from configs.ui_config import CURRENCIES, PURCHASE_STATUSES
 from configs.ui_config import Units, FormFieldSizes, Placeholders
 
@@ -11,7 +11,7 @@ class PurchaseOrderAdditionalInfo(QtWidgets.QWidget):
         self.setup_ui()
         logger.info("Initialized PurchaseOrderAdditionalInfo")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def setup_ui(self):
         """Set up the UI components for additional purchase order information."""
         layout = QtWidgets.QFormLayout(self)
@@ -33,7 +33,7 @@ class PurchaseOrderAdditionalInfo(QtWidgets.QWidget):
         layout.addRow("Payment Method:", self.payment_method_field)
         logger.debug("Set up UI for PurchaseOrderAdditionalInfo")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def populate_fields(self, record_data):
         """Populate fields with existing record data."""
         self.vendor_order_number_field.setText(record_data.get('vendor_order_number', ''))
@@ -42,7 +42,7 @@ class PurchaseOrderAdditionalInfo(QtWidgets.QWidget):
         self.payment_method_field.setText(record_data.get('payment_method', ''))
         logger.debug("Populated fields in PurchaseOrderAdditionalInfo")
 
-    @ErrorHandler.handle_errors()
+    @ErrorManager.handle_errors()
     def get_data(self):
         """Retrieve data from input fields."""
         return {
