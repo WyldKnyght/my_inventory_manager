@@ -1,4 +1,4 @@
-sqlalchemy
 rich
 treelib
 python-dotenv
+pyqt6

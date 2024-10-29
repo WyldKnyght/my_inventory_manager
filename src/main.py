@@ -1,39 +1,26 @@
 # src/main.py
 import sys
-from PyQt6 import QtWidgets
-from user_interface.main_window_components import MainWindow
-from utils.custom_logging import logger
-from utils.error_manager import ErrorManager
-from configs.config_manager import config_manager
+from PyQt6.QtWidgets import QApplication
+from user_interface.main_window import MainWindow
+from controllers.db_modules.database_manager import DatabaseManager
+from utils.custom_logging import setup_logging, logger
 
-@ErrorManager.handle_errors()
-def initialize_app():
-    """Initialize the application and apply styles."""
-    app = QtWidgets.QApplication(sys.argv)
-    
-    # Initialize ConfigManager (if not already done)
-    config_manager._initialize()
-    
-    # Apply styles
-    config_manager.apply_styles()
-    
-    logger.info("Application initialized and styles applied")
-    return app
+setup_logging()
 
-@ErrorManager.handle_errors()
-def run_app():
-    """Initialize and run the main application."""
-    app = initialize_app()
-    
-    main_window = MainWindow()
-    main_window.show()
-    logger.info("Main window displayed")
-    
-    sys.exit(app.exec())
+def main():
+    app = QApplication(sys.argv)
+    logger.info("Starting application...")
+
+    db_manager = DatabaseManager()
+    db_manager.initialize_database()  # Initialize the database
+
+    window = MainWindow(db_manager)
+    window.show()
+    logger.info("Application started successfully.")
+
+    exit_code = app.exec()
+    sys.exit(exit_code)
+    logger.info("Application closed.")
 
 if __name__ == "__main__":
-    try:
-        run_app()
-    except Exception as e:
-        logger.critical(f"Unhandled exception: {str(e)}")
-        sys.exit(1)
+    main()
